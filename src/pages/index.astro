@@ -1,4 +1,5 @@
 ---
+import Test from "../components/Test.astro";
 import Layout from "../layouts/Layout.astro";
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
@@ -8,4 +9,8 @@ import Layout from "../layouts/Layout.astro";
 <Layout>
   <h1>hello world</h1>
   <h1 class="text-3xl text-red-400 font-bold underline">Hello world!</h1>
+  <Test client:load />
+  <Test client:load />
+
+  <Test client:load />
 </Layout>
