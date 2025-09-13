@@ -1,0 +1,49 @@
+---
+import { donationsData } from './data.js';
+---
+
+<section class="w-full py-16 lg:py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <!-- Imagen -->
+      <div class="order-2 lg:order-1">
+        <div class="relative rounded-xl overflow-hidden">
+          <img 
+            src={donationsData.image.src}
+            alt={donationsData.image.alt}
+            width="600"
+            height="400"
+            loading="lazy"
+            class="w-full h-96 object-cover"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+        </div>
+      </div>
+      
+      <!-- Contenido -->
+      <div class="order-1 lg:order-2 space-y-6">
+        <div class="space-y-4">
+          <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900">
+            {donationsData.title}
+          </h2>
+          <p class="text-lg text-neutral-600 leading-relaxed">
+            {donationsData.description}
+          </p>
+          <p class="text-neutral-600 leading-relaxed">
+            {donationsData.callToAction}
+          </p>
+        </div>
+        
+        <button 
+          class="inline-flex items-center px-8 py-4 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors duration-300"
+          aria-label="Realizar donación"
+        >
+          Donar
+          <svg class="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
