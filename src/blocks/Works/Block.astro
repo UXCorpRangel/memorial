@@ -3,7 +3,7 @@ import { worksData } from './data.js';
 import TabList from './TabList.astro';
 ---
 
-<section class="w-full py-16 lg:py-24 bg-neutral-50">
+<section class="w-full py-16 lg:py-24 ">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
@@ -13,7 +13,7 @@ import TabList from './TabList.astro';
         Una colección de los proyectos y trabajos que marcaron su legado.
       </p>
     </div>
-    
+
     <TabList works={worksData.projects} />
   </div>
 </section>

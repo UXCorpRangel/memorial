@@ -2,13 +2,13 @@
 import { donationsData } from './data.js';
 ---
 
-<section class="w-full py-16 lg:py-24 bg-white">
+<section class="w-full py-16 lg:py-24 ">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <!-- Imagen -->
       <div class="order-2 lg:order-1">
         <div class="relative rounded-xl overflow-hidden">
-          <img 
+          <img
             src={donationsData.image.src}
             alt={donationsData.image.alt}
             width="600"
@@ -19,7 +19,7 @@ import { donationsData } from './data.js';
           <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
         </div>
       </div>
-      
+
       <!-- Contenido -->
       <div class="order-1 lg:order-2 space-y-6">
         <div class="space-y-4">
@@ -33,8 +33,8 @@ import { donationsData } from './data.js';
             {donationsData.callToAction}
           </p>
         </div>
-        
-        <button 
+
+        <button
           class="inline-flex items-center px-8 py-4 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors duration-300"
           aria-label="Realizar donación"
         >

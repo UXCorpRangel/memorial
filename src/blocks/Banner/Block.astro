@@ -2,7 +2,7 @@
 import { bannerData } from './data.js';
 ---
 
-<section class="w-full py-16 lg:py-24 bg-white">
+<section class="w-full py-16 lg:py-24 ">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
       <!-- Slider de imágenes -->
@@ -11,8 +11,8 @@ import { bannerData } from './data.js';
           <div class="slider-track flex transition-transform duration-500 ease-in-out" id="banner-slider">
             {bannerData.images.map((image, index) => (
               <div class="slider-slide flex-none w-full">
-                <img 
-                  src={image.src} 
+                <img
+                  src={image.src}
                   alt={image.alt}
                   width="600"
                   height="400"
@@ -23,9 +23,9 @@ import { bannerData } from './data.js';
             ))}
           </div>
         </div>
-        
+
         <!-- Controles del slider -->
-        <button 
+        <button
           class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
           id="prev-btn"
           aria-label="Imagen anterior"
@@ -34,8 +34,8 @@ import { bannerData } from './data.js';
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
           </svg>
         </button>
-        
-        <button 
+
+        <button
           class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
           id="next-btn"
           aria-label="Imagen siguiente"
@@ -44,11 +44,11 @@ import { bannerData } from './data.js';
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
           </svg>
         </button>
-        
+
         <!-- Indicadores -->
         <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
           {bannerData.images.map((_, index) => (
-            <button 
+            <button
               class={`w-2 h-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 indicator ${index === 0 ? 'bg-primary-600' : 'bg-white/60'}`}
               data-slide={index}
               aria-label={`Ir a imagen ${index + 1}`}
@@ -56,7 +56,7 @@ import { bannerData } from './data.js';
           ))}
         </div>
       </div>
-      
+
       <!-- Contenido de texto -->
       <div class="space-y-6">
         <div class="space-y-4">
@@ -84,7 +84,7 @@ import { bannerData } from './data.js';
       this.track = document.getElementById('banner-slider') as HTMLElement;
       this.slides = Array.from(this.track.children) as HTMLElement[];
       this.indicators = Array.from(document.querySelectorAll('.indicator')) as HTMLElement[];
-      
+
       this.init();
     }
 
@@ -92,7 +92,7 @@ import { bannerData } from './data.js';
       // Event listeners for navigation buttons
       document.getElementById('prev-btn')?.addEventListener('click', () => this.prevSlide());
       document.getElementById('next-btn')?.addEventListener('click', () => this.nextSlide());
-      
+
       // Event listeners for indicators
       this.indicators.forEach((indicator, index) => {
         indicator.addEventListener('click', () => this.goToSlide(index));
@@ -106,7 +106,7 @@ import { bannerData } from './data.js';
 
       // Auto-play
       this.startAutoplay();
-      
+
       // Pause on hover
       this.track.addEventListener('mouseenter', () => this.pauseAutoplay());
       this.track.addEventListener('mouseleave', () => this.startAutoplay());
@@ -130,7 +130,7 @@ import { bannerData } from './data.js';
     updateSlider() {
       const translateX = -this.currentSlide * 100;
       this.track.style.transform = `translateX(${translateX}%)`;
-      
+
       // Update indicators
       this.indicators.forEach((indicator, index) => {
         if (index === this.currentSlide) {

@@ -2,7 +2,7 @@
 import { cardsData } from './data.js';
 ---
 
-<section class="w-full py-16 lg:py-24 bg-neutral-50">
+<section class="w-full py-16 lg:py-24 ">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="text-center mb-12">
       <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
@@ -12,10 +12,10 @@ import { cardsData } from './data.js';
         Los elementos más importantes que definieron su vida y legado.
       </p>
     </div>
-    
+
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       {cardsData.cards.map((card, index) => (
-        <article 
+        <article
           class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 h-full flex flex-col justify-between"
           tabindex="0"
         >
@@ -27,7 +27,7 @@ import { cardsData } from './data.js';
               {card.description}
             </p>
           </div>
-          
+
           {/* Spacer to ensure consistent card heights */}
           <div class="mt-6 pt-4 border-t border-neutral-100">
             <span class="text-sm text-neutral-400 font-medium">
