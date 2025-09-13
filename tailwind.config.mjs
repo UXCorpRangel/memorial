@@ -4,6 +4,10 @@ export default {
   theme: {
     extend: {
       colors: {
+        background:{
+          "default":"#07091E",
+          'primary-gradient': 'radial-gradient(#491012, #07091E)',
+        },
         primary: {
           50: '#fef7ee',
           100: '#fdedd3',
