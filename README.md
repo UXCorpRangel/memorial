@@ -225,16 +225,6 @@ export const meta = {
 - **CSS Keyframes** - Animaciones suaves
 - **ES Modules** - Sistema de módulos moderno
 
-## 📋 Principios de Diseño
-
-- **KISS** (Keep It Simple, Stupid)
-- **YAGNI** (You Aren't Gonna Need It)
-- **DRY** (Don't Repeat Yourself)
-- **SOLID** Principles
-- **Convention over Configuration**
-- **Mobile-First Design**
-- **Accessibility-First (ARIA)**
-
 ---
 
 **Desarrollado con ❤️ para máxima flexibilidad y mantenibilidad**
