@@ -1,0 +1,48 @@
+---
+import { footerData } from './data.js';
+---
+
+<footer class="w-full bg-neutral-900">
+  <!-- Banner superior -->
+  <div class="w-full">
+    <img 
+      src={footerData.bannerImage.src}
+      alt={footerData.bannerImage.alt}
+      width="1200"
+      height="200"
+      loading="lazy"
+      class="w-full h-32 lg:h-48 object-cover"
+    />
+  </div>
+  
+  <!-- Contenido del footer -->
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="text-center space-y-8">
+      <!-- Logo -->
+      <div class="flex justify-center">
+        <img 
+          src={footerData.logo.src}
+          alt={footerData.logo.alt}
+          width="100"
+          height="40"
+          loading="lazy"
+          class="h-10 w-auto opacity-80"
+        />
+      </div>
+      
+      <!-- Mensaje principal -->
+      <div class="space-y-4">
+        <p class="text-neutral-300 text-lg max-w-2xl mx-auto leading-relaxed">
+          {footerData.message}
+        </p>
+      </div>
+      
+      <!-- Divisor -->
+      <div class="border-t border-neutral-700 pt-8">
+        <p class="text-neutral-400 text-sm">
+          hecho con amor por uxcorp
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>

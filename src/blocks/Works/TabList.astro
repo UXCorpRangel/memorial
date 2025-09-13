@@ -1,0 +1,170 @@
+---
+import type { Project } from './types.js';
+
+export interface Props {
+  works: Project[];
+}
+
+const { works } = Astro.props;
+---
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+  <!-- Tabs verticales -->
+  <div 
+    class="flex flex-col space-y-2"
+    role="tablist"
+    aria-label="Lista de proyectos"
+  >
+    {works.map((project, index) => (
+      <button
+        class={`tab-button text-left p-6 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+          index === 0 
+            ? 'bg-primary-100 text-primary-900 border-l-4 border-primary-600' 
+            : 'bg-white text-neutral-700 hover:bg-neutral-50 border-l-4 border-transparent hover:border-neutral-300'
+        }`}
+        role="tab"
+        aria-selected={index === 0 ? "true" : "false"}
+        aria-controls={`panel-${index}`}
+        id={`tab-${index}`}
+        data-tab-index={index}
+      >
+        <h3 class="font-semibold text-lg mb-2">{project.title}</h3>
+        <p class="text-sm opacity-80">{project.category}</p>
+      </button>
+    ))}
+  </div>
+  
+  <!-- Panel de contenido -->
+  <div class="relative min-h-96">
+    {works.map((project, index) => (
+      <div
+        class={`tab-panel absolute inset-0 transition-all duration-400 ${
+          index === 0 ? 'opacity-100 animate-fade-in-up' : 'opacity-0 pointer-events-none'
+        }`}
+        role="tabpanel"
+        aria-labelledby={`tab-${index}`}
+        id={`panel-${index}`}
+        tabindex="0"
+      >
+        <div class="bg-white rounded-xl p-8 shadow-sm">
+          <img 
+            src={project.image.src}
+            alt={project.image.alt}
+            width="500"
+            height="300"
+            loading="lazy"
+            class="w-full h-64 object-cover rounded-lg mb-6"
+          />
+          
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-2xl font-bold text-neutral-900 mb-2">{project.title}</h3>
+              <p class="text-primary-600 font-medium">{project.category}</p>
+            </div>
+            
+            <p class="text-neutral-600 leading-relaxed">{project.description}</p>
+            
+            <button class="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors duration-300">
+              Ver proyecto
+              <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    ))}
+  </div>
+</div>
+
+<script>
+  class TabController {
+    private tabs: HTMLElement[];
+    private panels: HTMLElement[];
+    private currentTab = 0;
+
+    constructor() {
+      this.tabs = Array.from(document.querySelectorAll('.tab-button')) as HTMLElement[];
+      this.panels = Array.from(document.querySelectorAll('.tab-panel')) as HTMLElement[];
+      
+      this.init();
+    }
+
+    init() {
+      // Click handlers
+      this.tabs.forEach((tab, index) => {
+        tab.addEventListener('click', () => this.showTab(index));
+      });
+
+      // Keyboard navigation
+      this.tabs.forEach((tab, index) => {
+        tab.addEventListener('keydown', (e) => this.handleKeydown(e, index));
+      });
+    }
+
+    showTab(index: number) {
+      // Hide current panel with fade out
+      const currentPanel = this.panels[this.currentTab];
+      currentPanel.classList.remove('animate-fade-in-up');
+      currentPanel.classList.add('animate-fade-out-down');
+      
+      setTimeout(() => {
+        currentPanel.classList.add('opacity-0', 'pointer-events-none');
+        currentPanel.classList.remove('animate-fade-out-down');
+
+        // Update tab states
+        this.tabs[this.currentTab].setAttribute('aria-selected', 'false');
+        this.tabs[this.currentTab].classList.remove('bg-primary-100', 'text-primary-900', 'border-primary-600');
+        this.tabs[this.currentTab].classList.add('bg-white', 'text-neutral-700', 'border-transparent');
+
+        // Show new panel with fade in
+        this.currentTab = index;
+        const newPanel = this.panels[this.currentTab];
+        newPanel.classList.remove('opacity-0', 'pointer-events-none');
+        newPanel.classList.add('animate-fade-in-up');
+
+        // Update new tab state
+        this.tabs[this.currentTab].setAttribute('aria-selected', 'true');
+        this.tabs[this.currentTab].classList.remove('bg-white', 'text-neutral-700', 'border-transparent');
+        this.tabs[this.currentTab].classList.add('bg-primary-100', 'text-primary-900', 'border-primary-600');
+      }, 150);
+    }
+
+    handleKeydown(e: KeyboardEvent, index: number) {
+      let nextIndex = index;
+
+      switch (e.key) {
+        case 'ArrowDown':
+          e.preventDefault();
+          nextIndex = (index + 1) % this.tabs.length;
+          break;
+        case 'ArrowUp':
+          e.preventDefault();
+          nextIndex = index === 0 ? this.tabs.length - 1 : index - 1;
+          break;
+        case 'Home':
+          e.preventDefault();
+          nextIndex = 0;
+          break;
+        case 'End':
+          e.preventDefault();
+          nextIndex = this.tabs.length - 1;
+          break;
+        case 'Enter':
+        case ' ':
+          e.preventDefault();
+          this.showTab(index);
+          return;
+        default:
+          return;
+      }
+
+      this.tabs[nextIndex].focus();
+    }
+  }
+
+  // Initialize when DOM is loaded
+  document.addEventListener('DOMContentLoaded', () => {
+    new TabController();
+  });
+</script>

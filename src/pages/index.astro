@@ -1,15 +1,14 @@
 ---
-import Test from "../components/Test.astro";
-import Test2 from "../components/Test2.astro";
-import Layout from "../layouts/Layout.astro";
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getResolvedSections } from '../blocks/registry.js';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const sections = getResolvedSections();
 ---
 
-<Layout>
-  <h1>hello world</h1>
-  <h1 class="text-3xl text-red-400 font-bold underline">Hello world!</h1>
-  <Test client:load />
-  <Test2 client:load />
-</Layout>
+<BaseLayout title="Memorial Landing">
+  <main>
+    {sections.map(({ Component, props }) => (
+      <Component {...props} />
+    ))}
+  </main>
+</BaseLayout>

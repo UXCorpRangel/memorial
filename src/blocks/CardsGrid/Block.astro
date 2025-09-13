@@ -1,0 +1,41 @@
+---
+import { cardsData } from './data.js';
+---
+
+<section class="w-full py-16 lg:py-24 bg-neutral-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
+        Aspectos destacados
+      </h2>
+      <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
+        Los elementos más importantes que definieron su vida y legado.
+      </p>
+    </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {cardsData.cards.map((card, index) => (
+        <article 
+          class="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 h-full flex flex-col justify-between"
+          tabindex="0"
+        >
+          <div class="space-y-4 flex-grow">
+            <h3 class="text-xl font-semibold text-neutral-900 leading-tight">
+              {card.title}
+            </h3>
+            <p class="text-neutral-600 leading-relaxed">
+              {card.description}
+            </p>
+          </div>
+          
+          {/* Spacer to ensure consistent card heights */}
+          <div class="mt-6 pt-4 border-t border-neutral-100">
+            <span class="text-sm text-neutral-400 font-medium">
+              {String(index + 1).padStart(2, '0')}
+            </span>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

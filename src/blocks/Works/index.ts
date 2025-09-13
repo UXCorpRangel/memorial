@@ -1,0 +1,9 @@
+import Block from './Block.astro';
+
+export const meta = {
+  slug: 'Works',
+  order: 4,
+  enabled: true
+};
+
+export default Block;
