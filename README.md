@@ -217,14 +217,6 @@ export const meta = {
 - Mocking sencillo de dependencias
 - Tests unitarios enfocados
 
-## 🛠️ Tecnologías Utilizadas
-
-- **Astro** - Framework principal
-- **TailwindCSS** - Estilos utilitarios
-- **TypeScript** - Tipado estático
-- **CSS Keyframes** - Animaciones suaves
-- **ES Modules** - Sistema de módulos moderno
-
 ---
 
 **Desarrollado con ❤️ para máxima flexibilidad y mantenibilidad**
