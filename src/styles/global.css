@@ -1,3 +1,7 @@
+html {
+  font-family: 'JetBrains Mono', monospace;
+}
+
 .tyto-logo-hover-svg svg {
   transition: all 0.6s ease;
 }

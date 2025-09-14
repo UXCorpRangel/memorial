@@ -4,86 +4,34 @@ import { messagesData } from './data.js';
 
 <section class="w-full py-16 lg:py-24 ">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
-        Mensajes y dedicatorias
+    <div class="text-left mb-12">
+      <h2 class="text-3xl lg:text-4xl font-bold text-neutral-100 mb-4">
+        Mensajes y dedicatoria
       </h2>
-      <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
-        Las palabras de cariño y recuerdos que compartimos en su memoria.
-      </p>
     </div>
 
     <div class="marquee-container relative overflow-hidden mask-gradient-lr">
       <div
-        class="marquee-track flex gap-6 animate-marquee hover:animate-marquee-paused"
+        class="marquee-track flex gap-6 animate-marquee"
         style="width: calc(200% + 1.5rem)"
       >
         <!-- First set of messages -->
         <div class="flex gap-6 min-w-0 shrink-0">
           {messagesData.messages.map((message) => (
-            <article class="bg-neutral-50 rounded-xl p-6 w-80 flex-shrink-0">
+            <article class="border-[1px] border-[#383848] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] p-6 w-[484px] h-[295px] flex-shrink-0">
               <div class="space-y-4">
-                <p class="text-neutral-700 leading-relaxed italic">
+                <img src={messagesData.icon} alt="Coin" />
+                <p class="text-[#FFFFFF] leading-relaxed">
                   "{message.text}"
                 </p>
-                <footer class="flex items-center space-x-3">
-                  <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-                    <span class="text-primary-600 font-semibold text-sm">
-                      {message.author.split(' ').map(n => n[0]).join('').substring(0, 2)}
-                    </span>
-                  </div>
-                  <div>
-                    <p class="font-semibold text-neutral-900 text-sm">{message.author}</p>
-                    <p class="text-neutral-500 text-xs">{message.date}</p>
-                  </div>
-                </footer>
-              </div>
-            </article>
-          ))}
-        </div>
-
-        <!-- Duplicate set for seamless loop -->
-        <div class="flex gap-6 min-w-0 shrink-0" aria-hidden="true">
-          {messagesData.messages.map((message) => (
-            <article class="bg-neutral-50 rounded-xl p-6 w-80 flex-shrink-0">
-              <div class="space-y-4">
-                <p class="text-neutral-700 leading-relaxed italic">
-                  "{message.text}"
+                <p class="mt-4">
+                  <strong class="text-[#FFFFFF] font-semibold text-lg">{message.author}</strong> - <span class="text-[#FFFFFF] text-sm">{message.date}</span>
                 </p>
-                <footer class="flex items-center space-x-3">
-                  <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-                    <span class="text-primary-600 font-semibold text-sm">
-                      {message.author.split(' ').map(n => n[0]).join('').substring(0, 2)}
-                    </span>
-                  </div>
-                  <div>
-                    <p class="font-semibold text-neutral-900 text-sm">{message.author}</p>
-                    <p class="text-neutral-500 text-xs">{message.date}</p>
-                  </div>
-                </footer>
               </div>
             </article>
           ))}
         </div>
       </div>
     </div>
-
-    <div class="text-center mt-8">
-      <p class="text-sm text-neutral-500">
-        Los mensajes se desplazan de forma continua. Pasa el cursor sobre ellos para pausar.
-      </p>
-    </div>
   </div>
 </section>
-
-<style>
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track {
-      animation: none !important;
-    }
-
-    .marquee-track:hover {
-      animation: none !important;
-    }
-  }
-</style>

@@ -4,8 +4,8 @@ export const footerData = {
     alt: "Banner memorial",
   },
   dogs: {
-    src: "/dogs.png",
-    alt: "dogs",
+    src: "/sleep.gif",
+    alt: "dogs sleeping",
   },
   logo: {
     src: "/heart.gif",
