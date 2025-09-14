@@ -3,10 +3,16 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     extend: {
+      fontFamily: {
+        bebas: ['"Bebas Neue"', 'sans-serif'],
+      },
       colors: {
         background:{
           "default":"#07091E",
           'primary-gradient': 'radial-gradient(#491012, #07091E)',
+        },
+        hover:{
+          primary:"#1ee0e1"
         },
         primary: {
           50: '#fef7ee',
