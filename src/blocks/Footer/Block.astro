@@ -2,7 +2,18 @@
 import { footerData } from "./data.js";
 ---
 
-<footer class="flex flex-col gap-8 pb-6 items-center w-full">
+<footer class="flex flex-col gap-8 pb-6 items-center w-full relative">
+
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2
+           h-[110vh] w-[90vw]  overflow-hidden -z-10">
+    <div
+      class="absolute bottom-[-35vh] left-1/2 -translate-x-1/2
+             h-[110vh] w-[90vw] max-w-[1440px]
+             bg-[radial-gradient(50%_50%_at_50%_50%,#491012_0%,#07091E_100%)]">
+    </div>
+  </div>
   <!-- Logo -->
   <img
     src={footerData.dogs.src}
