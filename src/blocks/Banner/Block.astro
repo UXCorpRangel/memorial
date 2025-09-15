@@ -4,66 +4,43 @@ import { bannerData } from './data.js';
 
 <section class="w-full py-16 lg:py-24 ">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    <div class="flex flex-col lg:flex-row gap-8 px-8 py-8 bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]">
       <!-- Slider de imágenes -->
       <div class="relative">
-        <div class="slider-container overflow-hidden rounded-xl">
+        <div class="slider-container overflow-hidden w-[450px]">
           <div class="slider-track flex transition-transform duration-500 ease-in-out" id="banner-slider">
             {bannerData.images.map((image, index) => (
               <div class="slider-slide flex-none w-full">
                 <img
                   src={image.src}
                   alt={image.alt}
-                  width="600"
-                  height="400"
                   loading="lazy"
-                  class="w-full h-96 object-cover"
+                  class="w-[450px] h-[450px] object-cover"
                 />
               </div>
             ))}
           </div>
         </div>
 
-        <!-- Controles del slider -->
-        <button
-          class="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
-          id="prev-btn"
-          aria-label="Imagen anterior"
-        >
-          <svg class="w-6 h-6 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        <button
-          class="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white/80 hover:bg-white p-2 rounded-full shadow-lg focus:outline-none focus:ring-2 focus:ring-primary-500 transition-colors"
-          id="next-btn"
-          aria-label="Imagen siguiente"
-        >
-          <svg class="w-6 h-6 text-neutral-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-
         <!-- Indicadores -->
         <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {bannerData.images.map((_, index) => (
+          {bannerData.images.map((_, index) => {
+            return (
             <button
-              class={`w-2 h-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 indicator ${index === 0 ? 'bg-primary-600' : 'bg-white/60'}`}
+              class={`${index === 0 ? 'bg-[#F3384A] w-6' : 'bg-[#383848] w-2'} h-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 indicator`}
               data-slide={index}
               aria-label={`Ir a imagen ${index + 1}`}
             />
-          ))}
+          )})}
         </div>
       </div>
 
-      <!-- Contenido de texto -->
       <div class="space-y-6">
         <div class="space-y-4">
-          <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900">
+          <h2 class="text-[32px] pb-7 font-bold text-white">
             {bannerData.title}
           </h2>
-          <p class="text-lg text-neutral-600 leading-relaxed">
+          <p class="text-[16px] text-white leading-relaxed">
             {bannerData.description}
           </p>
         </div>
@@ -133,13 +110,16 @@ import { bannerData } from './data.js';
 
       // Update indicators
       this.indicators.forEach((indicator, index) => {
-        if (index === this.currentSlide) {
-          indicator.classList.remove('bg-white/60');
-          indicator.classList.add('bg-primary-600');
-        } else {
-          indicator.classList.remove('bg-primary-600');
-          indicator.classList.add('bg-white/60');
-        }
+        const isActive = index === this.currentSlide;
+
+        indicator.classList.toggle('w-6', isActive);
+        indicator.classList.toggle('w-2', !isActive);
+
+        indicator.classList.toggle('bg-[#F3384A]', isActive);
+        indicator.classList.toggle('bg-[#383848]', !isActive);
+
+        // Accesibilidad opcional
+        indicator.setAttribute('aria-current', isActive ? 'true' : 'false');
       });
     }
 
