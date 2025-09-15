@@ -17,12 +17,8 @@ export default {
           primary: "#1ee0e1",
         },
         primary: {
-          50: "#fef7ee",
-          100: "#fdedd3",
-          500: "#f97316",
-          600: "#ea580c",
-          700: "#c2410c",
-          900: "#9a3412",
+          DEFAULT: "#f3384a",
+          hover: "#972123",
         },
         secondary: {
           50: "#f8fafc",
@@ -54,10 +50,46 @@ export default {
           "0%": { opacity: "1", transform: "translateY(0)" },
           "100%": { opacity: "0", transform: "translateY(-20px)" },
         },
+        neon: {
+          "0%": {
+            filter:
+              "drop-shadow(0 0 5px #f5f5f5) drop-shadow(0 0 10px #f5f5f5) drop-shadow(0 0 20px #f5f5f5)",
+            opacity: "1",
+          },
+          "20%": {
+            opacity: "0.5",
+            filter: "none",
+          },
+          "25%": {
+            opacity: "1",
+          },
+          "30%": {
+            opacity: "0.3",
+          },
+          "32%": {
+            opacity: "1",
+          },
+          "40%": {
+            opacity: "0.2",
+            filter: "none",
+          },
+          "45%": {
+            opacity: "1",
+            filter:
+              "drop-shadow(0 0 5px #f5f5f5) drop-shadow(0 0 10px #f5f5f5) drop-shadow(0 0 20px #f5f5f5)",
+          },
+          "70%": {
+            opacity: "1",
+          },
+          "100%": {
+            opacity: "0.9",
+          },
+        },
       },
       animation: {
         "fade-in-up": "fade-in-up 0.4s ease-out",
         "fade-out-down": "fade-out-down 0.3s ease-in",
+        neon: "neon 4s linear infinite",
       },
       maskImage: {
         "gradient-lr":

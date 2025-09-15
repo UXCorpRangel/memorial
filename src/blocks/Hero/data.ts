@@ -1,22 +1,25 @@
 export const heroData = {
-  title: "Un memorial para recordar",
-  subtitle: "Una plataforma dedicada a preservar los recuerdos y honrar la memoria de quienes ya no están con nosotros.",
+  heading: "Un lugar para",
+  subheading: "recordar y agradecer",
+  description: "todo lo que Tyto_Mix contruyó",
   images: [
     {
-      src: "/favicon.svg",
-      alt: "Imagen memorial 1"
+      src: "/Tyto-portrait.webp",
+      alt: "Imagen memorial 1",
+      title: "Jaime Gutierrez 1993-2025",
+      position: "bottom-0 translate-x-1/2 -rotate-[8deg] z-20",
     },
     {
-      src: "/favicon.svg", 
-      alt: "Imagen memorial 2"
+      src: "/Tyto-sandy-portrait.webp",
+      alt: "Imagen memorial 2",
+      title: "Miembro de UX Corp Rangel",
+      position: "-top-10 translate-x-1/4 -rotate-[8deg]",
     },
     {
-      src: "/favicon.svg",
-      alt: "Imagen memorial 3"
+      src: "/Sandy-portrait.webp",
+      alt: "Imagen memorial 3",
+      title: "Sandy aprobadora de PR’s",
+      position: "right-0 -translate-y-1/2 rotate-[18deg] z-10",
     },
-    {
-      src: "/favicon.svg",
-      alt: "Imagen memorial 4"
-    }
-  ]
+  ],
 };
