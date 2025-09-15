@@ -10,42 +10,54 @@ const { heading, subheading, description } = heroData;
 ---
 
 <section
-  class="flex flex-col lg:flex-row justify-center items-center min-h-[calc(100dvh-90px)] max-w-screen-2xl mx-auto h-full gap-4"
+  class="flex flex-col lg:flex-row justify-center items-center min-h-[calc(100dvh-90px)] max-w-screen-2xl mx-auto h-full gap-10 lg:gap-4"
 >
   <div>
-    <div class="space-y-6">
-      <Image
-        src="/Tyto-Sandy.webp"
-        alt="Tyto Sandy"
-        width="124"
-        height="163"
-        class="object-cover"
-      />
-      <h1
-        class="text-4xl sm:text-5xl lg:text-6xl font-bold bg-clip-text text-white text-transparent animate-neon"
-      >
-        {heading}
-      </h1>
-      <p
-        class="text-4xl sm:text-5xl lg:text-6xl stroke-white text-transparent animate-neon"
-      >
-        {subheading}
-      </p>
-      <p class="text-2xl text-white">
-        {description}
-      </p>
+    <div
+      class="absolute inset-0 -z-10"
+      style={{
+        background:
+          "radial-gradient(ellipse 80% 60% at 50% 0%, rgb(113 29 47), transparent 70%), #07091E",
+      }}
+    >
     </div>
-    <div class="flex flex-col sm:flex-row gap-4 mt-12">
-      <Button variant="primary"> Donar al Paypal </Button>
-      <Button variant="secondary"> Ver Codepen</Button>
+    <div>
+      <div class="space-y-6">
+        <Image
+          src="/Tyto-Sandy.webp"
+          alt="Tyto Sandy"
+          width="124"
+          height="163"
+          class="object-cover"
+        />
+        <h1
+          class="text-4xl sm:text-5xl lg:text-6xl font-bold bg-clip-text text-white text-transparent animate-neon"
+        >
+          {heading}
+        </h1>
+        <p
+          class="text-4xl sm:text-5xl lg:text-6xl stroke-white text-transparent animate-neon"
+        >
+          {subheading}
+        </p>
+        <p class="text-2xl text-white">
+          {description}
+        </p>
+      </div>
+      <div
+        class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-12"
+      >
+        <Button variant="primary"> Donar al Paypal </Button>
+        <Button variant="secondary"> Ver Codepen</Button>
+      </div>
     </div>
   </div>
-  <div class="flex-1 relative">
+  <div class="flex-1 relative space-y-4 h-full">
     {
       heroData.images.map((image, index) => (
         <div
           class={
-            "w-fit bg-white/10 backdrop-blur px-4 py-6 border border-gray-800 absolute " +
+            "w-fit bg-white/10 backdrop-blur px-4 py-6 border border-gray-800/20 lg:absolute hover:rotate-0 hover:scale-105 lg:hover:scale-125 transition-all duration-150 hover:z-50 brightness-90 hover:brightness-100 " +
             image.position
           }
         >
@@ -56,9 +68,14 @@ const { heading, subheading, description } = heroData;
             height="300"
             class="object-cover"
           />
-          <p class="text-white mt-6">{image.title}</p>
+          <p class="text-white mt-6 text-center">{image.title}</p>
         </div>
       ))
     }
+    <div
+      class="absolute inset-x-0 top-1/4 lg:translate-x-1/4 lg:-translate-y-1/4 scale-150 -z-10"
+    >
+      <img src="/Ellipse-hero.svg" alt="" />
+    </div>
   </div>
 </section>
