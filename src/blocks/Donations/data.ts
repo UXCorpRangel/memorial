@@ -1,9 +1,8 @@
 export const donationsData = {
   title: "Apoya su legado",
-  description: "Tu donación ayuda a mantener viva la memoria y continuar con los proyectos que tanto le importaban.",
-  callToAction: "Cada contribución, sin importar su tamaño, hace una diferencia significativa en nuestra misión de preservar su legado y continuar su obra.",
+  description: "Con tu apoyo queremos ayudar a cubrir los gastos más urgentes para despedir a Tyto y acompañar a su familia en este momento difícil, los gastos deben cubrir:",
   image: {
-    src: "/favicon.svg",
+    src: "/tyto-sandy2.svg",
     alt: "Apoya su legado"
   }
 };
