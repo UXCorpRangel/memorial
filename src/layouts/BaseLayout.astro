@@ -4,11 +4,15 @@ export interface Props {
   description?: string;
   lang?: string;
 }
-
-const { title = "Memorial Landing", description = "Una landing page memorial", lang = "es" } = Astro.props;
+import "../styles/global.css";
+const {
+  title = "Memorial Landing",
+  description = "Una landing page memorial",
+  lang = "es",
+} = Astro.props;
 ---
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
@@ -16,14 +20,34 @@ const { title = "Memorial Landing", description = "Una landing page memorial", l
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <title>{title}</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+    <link href="./styles/globals.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap"
+      rel="stylesheet"
+    />
     <style>
-      html { font-family: 'Inter', system-ui, sans-serif; }
-      
+      html {
+        font-family: 'JetBrains Mono', monospace;
+      }
+
       @media (prefers-reduced-motion: reduce) {
-        *, *::before, *::after {
+        *,
+        *::before,
+        *::after {
           animation-duration: 0.01ms !important;
           animation-iteration-count: 1 !important;
           transition-duration: 0.01ms !important;
@@ -32,7 +56,7 @@ const { title = "Memorial Landing", description = "Una landing page memorial", l
       }
     </style>
   </head>
-  <body class="bg-white text-neutral-900 antialiased">
+  <body class="bg-background-default text-neutral-900 antialiased">
     <slot />
   </body>
 </html>

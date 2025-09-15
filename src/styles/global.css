@@ -1,1 +1,16 @@
-@import "tailwindcss";
+html {
+  font-family: "JetBrains Mono", monospace;
+}
+
+.tyto-logo-hover-svg svg {
+  transition: all 0.6s ease;
+}
+
+.tyto-logo-hover-svg:hover svg {
+  fill: color-mix(in srgb, #d22222, #e5e9f0 51%);
+  transform: scale(1.25);
+}
+
+.stroke-white {
+  -webkit-text-stroke: 1px white;
+}

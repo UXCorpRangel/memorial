@@ -1,0 +1,74 @@
+.deck-wrapper {
+  min-height: 60vh;
+  display: grid;
+  place-items: center;
+}
+
+.card-fan {
+  position: relative;
+  width: 360px;
+  height: 400px;
+  perspective: 1000px;
+
+  --w: 240px;
+  --h: 368px;
+  --scale-init: .96;
+  --shift: 42%;
+  --rot: 18deg;
+}
+
+.card-fan .card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--w);
+  height: var(--h);
+  transform: translate(-50%, -50%) rotate(0deg) translateX(0) scale(var(--scale-init));
+  transform-origin: 50% 90%;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,.35);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.card-fan .card-face {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.card-fan .card:nth-child(1) { --card-rot: calc(var(--rot) * -1); --card-shift: calc(var(--shift) * -1); z-index: 10; }
+.card-fan .card:nth-child(2) { --card-rot: 0deg;                        --card-shift: 0%;                   z-index: 20; }
+.card-fan .card:nth-child(3) { --card-rot: var(--rot);                  --card-shift: var(--shift);          z-index: 15; }
+
+.card-fan.is-visible .card {
+  animation: fan-open 700ms cubic-bezier(.2,.8,.2,1) forwards;
+}
+.card-fan.is-visible .card:nth-child(1) { animation-delay: 40ms; }
+.card-fan.is-visible .card:nth-child(2) { animation-delay: 120ms; }
+.card-fan.is-visible .card:nth-child(3) { animation-delay: 200ms; }
+
+.card-fan.is-visible .card:hover {
+  transform:
+    translate(-50%, -56%)
+    rotate(var(--card-rot))
+    translateX(var(--card-shift))
+    scale(1.02) !important;
+}
+
+@keyframes fan-open {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(0) scale(var(--scale-init));
+    opacity: 0;
+  }
+  60% {
+    transform: translate(-50%, -52%) rotate(calc(var(--card-rot) * 1.08)) translateX(calc(var(--card-shift) * 1.08)) scale(1.01);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -54%) rotate(var(--card-rot)) translateX(var(--card-shift)) scale(1);
+    opacity: 1;
+  }
+}

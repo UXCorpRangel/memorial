@@ -1,11 +1,18 @@
 export const footerData = {
   bannerImage: {
     src: "/favicon.svg",
-    alt: "Banner memorial"
+    alt: "Banner memorial",
+  },
+  dogs: {
+    src: "/sleep.gif",
+    alt: "dogs sleeping",
   },
   logo: {
-    src: "/favicon.svg",
-    alt: "Logo Memorial"
+    src: "/heart.gif",
+    alt: "Logo Memorial",
   },
-  message: "Un memorial dedicado a preservar los recuerdos más preciados y honrar la memoria de quienes siguen viviendo en nuestros corazones."
+  message:
+    "Este es el texto que vamos a usar para dedicarle este trabajo a tyto, es un mensaje de UXcorp en general, será un mensaje que podemos redactar juntos. Este es el texto que vamos a usar para dedicarle este trabajo a tyto, es un mensaje de UXcorp en general, será un mensaje que podemos redactar juntos",
+  made_one: "Hecho con",
+  made_two: "para tyto_mix",
 };

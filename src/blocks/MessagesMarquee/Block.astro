@@ -1,89 +1,80 @@
 ---
 import { messagesData } from './data.js';
+import './styles.css';
+
+const items = messagesData.messages ?? [];
+
+const loopItems = [...items, ...items];
+
 ---
 
-<section class="w-full py-16 lg:py-24 bg-white">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-center mb-12">
-      <h2 class="text-3xl lg:text-4xl font-bold text-neutral-900 mb-4">
-        Mensajes y dedicatorias
-      </h2>
-      <p class="text-lg text-neutral-600 max-w-2xl mx-auto">
-        Las palabras de cariño y recuerdos que compartimos en su memoria.
-      </p>
-    </div>
-    
-    <div class="marquee-container relative overflow-hidden mask-gradient-lr">
-      <div 
-        class="marquee-track flex gap-6 animate-marquee hover:animate-marquee-paused"
-        style="width: calc(200% + 1.5rem)"
-      >
-        <!-- First set of messages -->
-        <div class="flex gap-6 min-w-0 shrink-0">
-          {messagesData.messages.map((message) => (
-            <article class="bg-neutral-50 rounded-xl p-6 w-80 flex-shrink-0">
-              <div class="space-y-4">
-                <p class="text-neutral-700 leading-relaxed italic">
-                  "{message.text}"
-                </p>
-                <footer class="flex items-center space-x-3">
-                  <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-                    <span class="text-primary-600 font-semibold text-sm">
-                      {message.author.split(' ').map(n => n[0]).join('').substring(0, 2)}
-                    </span>
-                  </div>
-                  <div>
-                    <p class="font-semibold text-neutral-900 text-sm">{message.author}</p>
-                    <p class="text-neutral-500 text-xs">{message.date}</p>
-                  </div>
-                </footer>
-              </div>
-            </article>
-          ))}
-        </div>
-        
-        <!-- Duplicate set for seamless loop -->
-        <div class="flex gap-6 min-w-0 shrink-0" aria-hidden="true">
-          {messagesData.messages.map((message) => (
-            <article class="bg-neutral-50 rounded-xl p-6 w-80 flex-shrink-0">
-              <div class="space-y-4">
-                <p class="text-neutral-700 leading-relaxed italic">
-                  "{message.text}"
-                </p>
-                <footer class="flex items-center space-x-3">
-                  <div class="w-10 h-10 bg-primary-100 rounded-full flex items-center justify-center">
-                    <span class="text-primary-600 font-semibold text-sm">
-                      {message.author.split(' ').map(n => n[0]).join('').substring(0, 2)}
-                    </span>
-                  </div>
-                  <div>
-                    <p class="font-semibold text-neutral-900 text-sm">{message.author}</p>
-                    <p class="text-neutral-500 text-xs">{message.date}</p>
-                  </div>
-                </footer>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
-    </div>
-    
-    <div class="text-center mt-8">
-      <p class="text-sm text-neutral-500">
-        Los mensajes se desplazan de forma continua. Pasa el cursor sobre ellos para pausar.
-      </p>
+<section class="px-4 sm:px-6 lg:px-8 max-w-screen-2xl mx-auto">
+  <h2 class="text-5xl font-bold text-neutral-100 text-left">Mensajes y dedicatoria</h2>
+
+  <div class="overflow-x-hidden mask-gradient-lr pt-20 pb-20 slider">
+    <div class="slides flex flex-nowrap gap-[30px] w-[max-content] will-change-transform">
+      {loopItems.map((m, i) => (
+        <article
+          class="article group flex-none w-[484px]"
+          aria-hidden={i >= items.length}
+          id="messages"
+        >
+          <div class="space-y-4">
+            <img src={messagesData.icon} alt="" class="coin transform-gpu group-hover:animate-coin-jump" />
+            <p class="text-white leading-relaxed">"{m.text}"</p>
+            <p class="mt-4">
+              <strong class="text-white font-semibold text-lg">{m.author}</strong>
+              {" "}-{" "}
+              <span class="text-white/90 text-sm">{m.date}</span>
+            </p>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
 
-<style>
-  @media (prefers-reduced-motion: reduce) {
-    .marquee-track {
-      animation: none !important;
+<audio id="coin-sound" src={messagesData.sounds.coin} preload="auto"></audio>
+
+<script>
+  const articles = document.querySelectorAll("#messages");
+  const audioEl = document.querySelector("#coin-sound");
+
+  let audioUnlocked = false;
+
+  function unlockOnce() {
+    if (audioEl instanceof HTMLAudioElement) {
+      const p = audioEl.play();
+      if (p && typeof p.then === "function") {
+        p.then(() => {
+          audioEl.pause();
+          audioEl.currentTime = 0;
+          audioUnlocked = true;
+        }).catch(() => {
+          console.log('audio bloqueado -_-')
+        });
+      }
     }
-    
-    .marquee-track:hover {
-      animation: none !important;
-    }
+    window.removeEventListener("pointerdown", unlockOnce);
+    window.removeEventListener("touchstart", unlockOnce);
+    window.removeEventListener("keydown", unlockOnce);
   }
-</style>
+  window.addEventListener("pointerdown", unlockOnce, { once: true, passive: true });
+  window.addEventListener("touchstart", unlockOnce, { once: true, passive: true });
+  window.addEventListener("keydown", unlockOnce, { once: true });
+
+  articles.forEach((a) => {
+    a.addEventListener("pointerenter", () => {
+      if (!(audioEl instanceof HTMLAudioElement)) return;
+      if (!audioUnlocked) return;
+
+      const ch = audioEl.cloneNode(true);
+      if (ch instanceof HTMLAudioElement) {
+        ch.volume = audioEl.volume;
+        ch.play().catch(() => {});
+        ch.addEventListener("ended", () => ch.remove());
+        document.body.appendChild(ch);
+      }
+    }, { passive: true });
+  });
+</script>

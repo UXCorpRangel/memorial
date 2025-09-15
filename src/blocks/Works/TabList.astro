@@ -1,26 +1,31 @@
 ---
+import Button from '@/components/Button.astro';
 import type { Project } from './types.js';
+import './styles.css';
 
 export interface Props {
-  works: Project[];
+  works: {
+    projects: Project[];
+    cards: string[];
+  };
 }
 
 const { works } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+<div class="h-fit flex flex-col lg:flex-row gap-32">
   <!-- Tabs verticales -->
   <div 
-    class="flex flex-col space-y-2"
+    class="flex flex-col space-y-6"
     role="tablist"
     aria-label="Lista de proyectos"
   >
-    {works.map((project, index) => (
+    {works.projects.map((project, index) => (
       <button
-        class={`tab-button text-left p-6 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+        class={`w-[285px] tab-button text-center p-4 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#972123] ${
           index === 0 
-            ? 'bg-primary-100 text-primary-900 border-l-4 border-primary-600' 
-            : 'bg-white text-neutral-700 hover:bg-neutral-50 border-l-4 border-transparent hover:border-neutral-300'
+            ? 'border-[2.43px] border-solid [border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]' 
+            : 'border-[0.81px] border-solid border-[#383848] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]'
         }`}
         role="tab"
         aria-selected={index === 0 ? "true" : "false"}
@@ -28,17 +33,26 @@ const { works } = Astro.props;
         id={`tab-${index}`}
         data-tab-index={index}
       >
-        <h3 class="font-semibold text-lg mb-2">{project.title}</h3>
-        <p class="text-sm opacity-80">{project.category}</p>
+        <p class="text-[16px] text-white font-bold opacity-80">{project.title}</p>
       </button>
     ))}
   </div>
   
   <!-- Panel de contenido -->
-  <div class="relative min-h-96">
-    {works.map((project, index) => (
+  <div class="relative min-h-96 w-full flex-1">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute bottom-[-20vh] left-1/2 -translate-x-1/2
+            h-[75vh] w-[50vw] -z-10">
       <div
-        class={`tab-panel absolute inset-0 transition-all duration-400 ${
+        class="absolute bottom-0 left-1/2 -translate-x-1/2
+              h-[75vh] w-[50vw]
+              bg-[radial-gradient(50%_50%_at_50%_50%,#383848_0%,#07091E_100%)]">
+      </div>
+    </div>
+    {works.projects.map((project, index) => (
+      <div
+        class={`flex flex-col justify-center items-center tab-panel absolute inset-0 transition-all duration-400 ${
           index === 0 ? 'opacity-100 animate-fade-in-up' : 'opacity-0 pointer-events-none'
         }`}
         role="tabpanel"
@@ -46,32 +60,18 @@ const { works } = Astro.props;
         id={`panel-${index}`}
         tabindex="0"
       >
-        <div class="bg-white rounded-xl p-8 shadow-sm">
-          <img 
-            src={project.image.src}
-            alt={project.image.alt}
-            width="500"
-            height="300"
-            loading="lazy"
-            class="w-full h-64 object-cover rounded-lg mb-6"
-          />
-          
-          <div class="space-y-4">
-            <div>
-              <h3 class="text-2xl font-bold text-neutral-900 mb-2">{project.title}</h3>
-              <p class="text-primary-600 font-medium">{project.category}</p>
-            </div>
-            
-            <p class="text-neutral-600 leading-relaxed">{project.description}</p>
-            
-            <button class="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors duration-300">
-              Ver proyecto
-              <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
+        <section class="deck-wrapper">
+          <div id="fan-deck" class="card-fan">
+            {works.cards.map((card, index) => (
+              <article class="card">
+                <img src={card} alt={`Carta ${index + 1}`} class="card-face" />
+              </article>
+            ))}
           </div>
-        </div>
+        </section>
+        <Button variant='secondary'>
+          Ver proyecto
+        </Button>
       </div>
     ))}
   </div>
@@ -114,8 +114,8 @@ const { works } = Astro.props;
 
         // Update tab states
         this.tabs[this.currentTab].setAttribute('aria-selected', 'false');
-        this.tabs[this.currentTab].classList.remove('bg-primary-100', 'text-primary-900', 'border-primary-600');
-        this.tabs[this.currentTab].classList.add('bg-white', 'text-neutral-700', 'border-transparent');
+        this.tabs[this.currentTab].classList.remove('border-[2.43px]', 'border-solid', '[border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1]', 'bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]');
+        this.tabs[this.currentTab].classList.add('border-[0.81px]', 'border-solid', 'border-[#383848]', 'bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]');
 
         // Show new panel with fade in
         this.currentTab = index;
@@ -125,8 +125,8 @@ const { works } = Astro.props;
 
         // Update new tab state
         this.tabs[this.currentTab].setAttribute('aria-selected', 'true');
-        this.tabs[this.currentTab].classList.remove('bg-white', 'text-neutral-700', 'border-transparent');
-        this.tabs[this.currentTab].classList.add('bg-primary-100', 'text-primary-900', 'border-primary-600');
+        this.tabs[this.currentTab].classList.remove('border-[0.81px]', 'border-solid', 'border-[#383848]', 'bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]');
+        this.tabs[this.currentTab].classList.add('border-[2.43px]', 'border-solid', '[border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1]', 'bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]');
       }, 150);
     }
 
@@ -163,8 +163,23 @@ const { works } = Astro.props;
     }
   }
 
-  // Initialize when DOM is loaded
   document.addEventListener('DOMContentLoaded', () => {
     new TabController();
   });
+</script>
+
+<script>
+  const el = document.getElementById('fan-deck');
+  if (el) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          el.classList.add('is-visible');
+        } else {
+          el.classList.remove('is-visible');
+        }
+      });
+    }, { threshold: 0.4 });
+    io.observe(el);
+  }
 </script>

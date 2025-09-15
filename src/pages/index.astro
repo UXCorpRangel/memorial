@@ -6,9 +6,7 @@ const sections = getResolvedSections();
 ---
 
 <BaseLayout title="Memorial Landing">
-  <main>
-    {sections.map(({ Component, props }) => (
-      <Component {...props} />
-    ))}
+  <main class="overflow-x-hidden">
+    {sections.map(({ Component, props }) => <Component {...props} />)}
   </main>
 </BaseLayout>
