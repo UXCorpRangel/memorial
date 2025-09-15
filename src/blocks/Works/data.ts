@@ -1,9 +1,9 @@
 import type { Project } from './types.js';
 
-export const worksData: { projects: Project[] } = {
+export const worksData: { projects: Project[], cards: string[] } = {
   projects: [
     {
-      title: "Proyecto Comunidad",
+      title: "Cartas unicornio",
       category: "Trabajo Social",
       description: "Un proyecto dedicado a mejorar las condiciones de vida de la comunidad local, enfocándose en educación y desarrollo sostenible.",
       image: {
@@ -12,8 +12,8 @@ export const worksData: { projects: Project[] } = {
       }
     },
     {
-      title: "Arte y Cultura",
-      category: "Expresión Artística", 
+      title: "Codepen",
+      category: "Expresión Artística",
       description: "Una iniciativa cultural que promovía el arte local y la preservación de tradiciones culturales a través de talleres y exposiciones.",
       image: {
         src: "/favicon.svg",
@@ -21,7 +21,7 @@ export const worksData: { projects: Project[] } = {
       }
     },
     {
-      title: "Educación para Todos",
+      title: "Codepen",
       category: "Educación",
       description: "Programa educativo inclusivo que buscaba brindar oportunidades de aprendizaje a comunidades desfavorecidas.",
       image: {
@@ -30,7 +30,7 @@ export const worksData: { projects: Project[] } = {
       }
     },
     {
-      title: "Medio Ambiente",
+      title: "Codepen",
       category: "Sostenibilidad",
       description: "Iniciativa ambiental enfocada en la conservación y protección del medio ambiente local a través de acciones concretas.",
       image: {
@@ -38,5 +38,10 @@ export const worksData: { projects: Project[] } = {
         alt: "Proyecto Medio Ambiente"
       }
     }
+  ],
+  cards: [
+    '/cards/card-backend.png',
+    '/cards/card-hartyto.png',
+    '/cards/card-gnomo.png'
   ]
 };
