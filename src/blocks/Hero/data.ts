@@ -7,19 +7,19 @@ export const heroData = {
       src: "/Tyto-portrait.webp",
       alt: "Imagen memorial 1",
       title: "Jaime Gutierrez 1993-2025",
-      position: "bottom-0 translate-x-1/2 -rotate-[8deg] z-20",
+      position: "lg:bottom-0 lg:translate-x-1/2 lg:-rotate-[8deg] lg:z-20",
     },
     {
       src: "/Tyto-sandy-portrait.webp",
       alt: "Imagen memorial 2",
       title: "Miembro de UX Corp Rangel",
-      position: "-top-10 translate-x-1/4 -rotate-[8deg]",
+      position: "lg:-top-10 lg:translate-x-1/4 lg:-rotate-[8deg]",
     },
     {
       src: "/Sandy-portrait.webp",
       alt: "Imagen memorial 3",
       title: "Sandy aprobadora de PR’s",
-      position: "right-0 -translate-y-1/2 rotate-[18deg] z-10",
+      position: "lg:right-0 lg:-translate-y-1/2 lg:rotate-[18deg] lg:z-10",
     },
   ],
 };
