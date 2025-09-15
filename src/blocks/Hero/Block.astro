@@ -1,61 +1,64 @@
 ---
-import { heroData } from './data.js';
-import type { HeroProps } from './types.js';
+import Button from "@components/Button.astro";
+import { heroData } from "./data.js";
+import type { HeroProps } from "./types.js";
+import { Image } from "astro:assets";
 
 export interface Props extends HeroProps {}
 
-const { title = heroData.title, subtitle = heroData.subtitle } = Astro.props;
+const { heading, subheading, description } = heroData;
 ---
 
-<section class="w-full  py-16 lg:py-24">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-      <!-- Contenido de texto -->
-      <div class="space-y-8">
-        <div class="space-y-4">
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight text-neutral-900">
-            {title}
-          </h1>
-          <p class="text-xl text-neutral-600 leading-relaxed">
-            {subtitle}
-          </p>
-        </div>
-
-        <div class="flex flex-col sm:flex-row gap-4">
-          <button
-            class="inline-flex items-center justify-center px-8 py-4 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors duration-300"
-            aria-label="Botón primario"
-          >
-            Primario
-          </button>
-          <button
-            class="inline-flex items-center justify-center px-8 py-4 bg-white border border-neutral-300 text-neutral-700 font-semibold rounded-lg hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-500 focus:ring-offset-2 transition-colors duration-300"
-            aria-label="Botón secundario"
-          >
-            Secundario
-          </button>
-        </div>
-      </div>
-
-      <!-- Collage de imágenes -->
-      <div class="grid grid-cols-2 gap-4">
-        {heroData.images.map((image, index) => (
-          <div
-            class={`aspect-square rounded-xl overflow-hidden ${
-              index === 0 ? 'col-span-2' : ''
-            } ${index === 1 ? 'row-span-2' : ''}`}
-          >
-            <img
-              src={image.src}
-              alt={image.alt}
-              width="300"
-              height="300"
-              loading="lazy"
-              class="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
-            />
-          </div>
-        ))}
-      </div>
+<section
+  class="flex flex-col lg:flex-row justify-center items-center min-h-[calc(100dvh-90px)] max-w-screen-2xl mx-auto h-full gap-4"
+>
+  <div>
+    <div class="space-y-6">
+      <Image
+        src="/Tyto-Sandy.webp"
+        alt="Tyto Sandy"
+        width="124"
+        height="163"
+        class="object-cover"
+      />
+      <h1
+        class="text-4xl sm:text-5xl lg:text-6xl font-bold bg-clip-text text-white text-transparent animate-neon"
+      >
+        {heading}
+      </h1>
+      <p
+        class="text-4xl sm:text-5xl lg:text-6xl stroke-white text-transparent animate-neon"
+      >
+        {subheading}
+      </p>
+      <p class="text-2xl text-white">
+        {description}
+      </p>
     </div>
+    <div class="flex flex-col sm:flex-row gap-4 mt-12">
+      <Button variant="primary"> Donar al Paypal </Button>
+      <Button variant="secondary"> Ver Codepen</Button>
+    </div>
+  </div>
+  <div class="flex-1 relative">
+    {
+      heroData.images.map((image, index) => (
+        <div
+          class={
+            "w-fit bg-white/10 backdrop-blur px-4 py-6 border border-gray-800 absolute " +
+            image.position
+          }
+        >
+          <img
+            src={image.src}
+            alt={image.alt}
+            width="300"
+            height="300"
+            class="object-cover"
+          />
+          <p class="text-white mt-6">{image.title}</p>
+        </div>
+      ))
+    }
   </div>
 </section>
