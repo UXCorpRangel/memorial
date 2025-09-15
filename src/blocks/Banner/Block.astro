@@ -6,41 +6,43 @@ import { bannerData } from './data.js';
   <div>
     <div class="flex flex-col lg:flex-row gap-8 px-8 py-8 bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]">
       <!-- Slider de imágenes -->
-      <div class="relative">
-        <div class="slider-container overflow-hidden w-[450px]">
-          <div class="slider-track flex transition-transform duration-500 ease-in-out" id="banner-slider">
-            {bannerData.images.map((image, index) => (
-              <div class="slider-slide flex-none w-full">
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  loading="lazy"
-                  class="w-[450px] h-[450px] object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
+       <section class="flex flex-col relative items-center gap-4">
+         <div class="relative">
+           <div class="slider-container overflow-hidden w-[450px]">
+             <div class="slider-track flex transition-transform duration-500 ease-in-out" id="banner-slider">
+               {bannerData.images.map((image, index) => (
+                 <div class="slider-slide flex-none w-full">
+                   <img
+                     src={image.src}
+                     alt={image.alt}
+                     loading="lazy"
+                     class="w-[450px] h-[450px] object-cover select-none pointer-events-none"
+                   />
+                 </div>
+               ))}
+             </div>
+           </div>
 
-        <!-- Indicadores -->
-        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {bannerData.images.map((_, index) => {
-            return (
-            <button
-              class={`${index === 0 ? 'bg-[#F3384A] w-6' : 'bg-[#383848] w-2'} h-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 indicator`}
-              data-slide={index}
-              aria-label={`Ir a imagen ${index + 1}`}
-            />
-          )})}
-        </div>
-      </div>
+         </div>
+         <!-- Indicadores -->
+         <div class=" left-1/2 transform  flex space-x-2">
+           {bannerData.images.map((_, index) => {
+             return (
+             <button
+               class={`${index === 0 ? 'bg-[#F3384A] w-6' : 'bg-[#383848] w-2'} h-2 rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary-500 indicator`}
+               data-slide={index}
+               aria-label={`Ir a imagen ${index + 1}`}
+             />
+           )})}
+         </div>
+       </section>
 
-      <div class="space-y-6">
+      <div class="space-y-6  w-full flex flex-col justify-center pl-8">
         <div class="space-y-4">
-          <h2 class="text-[32px] pb-7 font-bold text-white">
+          <h2 class="text-[32px] font-bold text-white">
             {bannerData.title}
           </h2>
-          <p class="text-[16px] text-white leading-relaxed">
+          <p class="text-[16px] text-white leading-relaxed whitespace-pre-line">
             {bannerData.description}
           </p>
         </div>
