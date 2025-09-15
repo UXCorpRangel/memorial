@@ -1,8 +1,8 @@
 ---
 import Button from "@components/Button.astro";
+import { Image } from "astro:assets";
 import { heroData } from "./data.js";
 import type { HeroProps } from "./types.js";
-import { Image } from "astro:assets";
 
 export interface Props extends HeroProps {}
 
@@ -57,10 +57,68 @@ const { heading, subheading, description } = heroData;
       heroData.images.map((image, index) => (
         <div
           class={
-            "w-fit bg-white/10 backdrop-blur px-4 py-6 border border-gray-800/20 lg:absolute hover:rotate-0 hover:scale-105 lg:hover:scale-125 transition-all duration-150 hover:z-50 brightness-90 hover:brightness-100 " +
+            "relative w-fit bg-white/10 backdrop-blur px-4 py-6 border border-gray-800/20 lg:absolute hover:rotate-0 hover:scale-105 lg:hover:scale-125 transition-all duration-150 hover:z-50 brightness-90 hover:brightness-100 " +
             image.position
           }
         >
+          {image.showStars ? (
+            <div class="flex flex-row items-center  justify-end absolute top-0 gap-4 right-[-15px] rotate-45">
+              <svg
+                width="48"
+                height="47"
+                viewBox="0 0 48 47"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="rotate-[30deg]"
+              >
+                <path
+                  d="M20.2554 0.350439L29.1392 16.3375L47.0582 20.0001L31.0712 28.8839L27.4086 46.8029L18.5248 30.8159L0.605768 27.1533L16.5928 18.2695L20.2554 0.350439Z"
+                  fill="url(#paint0_linear_23_152)"
+                />
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_23_152"
+                    x1="0.605768"
+                    y1="27.1533"
+                    x2="47.0582"
+                    y2="20.0001"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#F3384A" />
+                    <stop offset="1" stop-color="#972123" />
+                  </linearGradient>
+                </defs>
+              </svg>
+
+              <svg
+                width="26"
+                height="26"
+                viewBox="0 0 26 26"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                class="rotate-[30deg]"
+              >
+                <path
+                  d="M23.0698 0.464589L19.1194 12.1629L25.4285 22.7766L13.7301 18.8262L3.11641 25.1353L7.0668 13.437L0.757701 2.82329L12.456 6.77369L23.0698 0.464589Z"
+                  fill="url(#paint0_linear_23_153)"
+                />
+                <defs>
+                  <linearGradient
+                    id="paint0_linear_23_153"
+                    x1="0.757701"
+                    y1="2.82329"
+                    x2="25.4285"
+                    y2="22.7766"
+                    gradientUnits="userSpaceOnUse"
+                  >
+                    <stop stop-color="#F3384A" />
+                    <stop offset="1" stop-color="#972123" />
+                  </linearGradient>
+                </defs>
+              </svg>
+            </div>
+          ) : null}
+
           <img
             src={image.src}
             alt={image.alt}
