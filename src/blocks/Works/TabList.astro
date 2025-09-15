@@ -1,4 +1,5 @@
 ---
+import Button from '@/components/Button.astro';
 import type { Project } from './types.js';
 
 export interface Props {
@@ -8,7 +9,7 @@ export interface Props {
 const { works } = Astro.props;
 ---
 
-<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+<div class="h-fit grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
   <!-- Tabs verticales -->
   <div 
     class="flex flex-col space-y-2"
@@ -17,10 +18,10 @@ const { works } = Astro.props;
   >
     {works.map((project, index) => (
       <button
-        class={`tab-button text-left p-6 rounded-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+        class={`tab-button text-center p-6 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-primary-500 ${
           index === 0 
-            ? 'bg-primary-100 text-primary-900 border-l-4 border-primary-600' 
-            : 'bg-white text-neutral-700 hover:bg-neutral-50 border-l-4 border-transparent hover:border-neutral-300'
+            ? 'border-[2.43px] border-solid [border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]' 
+            : 'border-[0.81px] border-solid border-[#383848] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]'
         }`}
         role="tab"
         aria-selected={index === 0 ? "true" : "false"}
@@ -28,8 +29,7 @@ const { works } = Astro.props;
         id={`tab-${index}`}
         data-tab-index={index}
       >
-        <h3 class="font-semibold text-lg mb-2">{project.title}</h3>
-        <p class="text-sm opacity-80">{project.category}</p>
+        <p class="text-[16px] text-white font-bold opacity-80">{project.category}</p>
       </button>
     ))}
   </div>
@@ -46,32 +46,10 @@ const { works } = Astro.props;
         id={`panel-${index}`}
         tabindex="0"
       >
-        <div class="bg-white rounded-xl p-8 shadow-sm">
-          <img 
-            src={project.image.src}
-            alt={project.image.alt}
-            width="500"
-            height="300"
-            loading="lazy"
-            class="w-full h-64 object-cover rounded-lg mb-6"
-          />
-          
-          <div class="space-y-4">
-            <div>
-              <h3 class="text-2xl font-bold text-neutral-900 mb-2">{project.title}</h3>
-              <p class="text-primary-600 font-medium">{project.category}</p>
-            </div>
-            
-            <p class="text-neutral-600 leading-relaxed">{project.description}</p>
-            
-            <button class="inline-flex items-center px-6 py-3 bg-primary-600 text-white font-semibold rounded-lg hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2 transition-colors duration-300">
-              Ver proyecto
-              <svg class="ml-2 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        </div>
+        <div class="w-[400px] h-[400px] bg-red-500" />
+        <Button variant='secondary'>
+          Ver proyecto
+        </Button>
       </div>
     ))}
   </div>
