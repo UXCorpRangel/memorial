@@ -38,7 +38,7 @@ const { works } = Astro.props;
   <div class="relative min-h-96">
     {works.map((project, index) => (
       <div
-        class={`tab-panel absolute inset-0 transition-all duration-400 ${
+        class={`flex flex-col justify-center items-center tab-panel absolute inset-0 transition-all duration-400 ${
           index === 0 ? 'opacity-100 animate-fade-in-up' : 'opacity-0 pointer-events-none'
         }`}
         role="tabpanel"
@@ -46,7 +46,7 @@ const { works } = Astro.props;
         id={`panel-${index}`}
         tabindex="0"
       >
-        <div class="w-[400px] h-[400px] bg-red-500" />
+        <div class="w-[100%] h-[100%] bg-red-500" />
         <Button variant='secondary'>
           Ver proyecto
         </Button>
