@@ -54,20 +54,10 @@ export default {
           "0%": { opacity: "1", transform: "translateY(0)" },
           "100%": { opacity: "0", transform: "translateY(-20px)" },
         },
-        marquee: {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(-100%)" },
-        },
-        "marquee-paused": {
-          "0%": { transform: "translateX(0%)" },
-          "100%": { transform: "translateX(0%)" },
-        },
       },
       animation: {
         "fade-in-up": "fade-in-up 0.4s ease-out",
         "fade-out-down": "fade-out-down 0.3s ease-in",
-        marquee: "marquee 30s linear infinite",
-        "marquee-paused": "marquee-paused 0s linear infinite",
       },
       maskImage: {
         "gradient-lr":

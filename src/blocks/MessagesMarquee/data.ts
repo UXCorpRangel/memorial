@@ -1,5 +1,8 @@
 export const messagesData = {
   icon: "/coin.svg",
+  sounds: {
+    coin: "/sounds/coin.mp3"
+  },
   messages: [
     {
       text: "Una persona extraordinaria que siempre tuvo una palabra de aliento para todos. Su legado vivirá por siempre en nuestros corazones.",

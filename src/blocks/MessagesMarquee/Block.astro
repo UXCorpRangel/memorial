@@ -1,37 +1,80 @@
 ---
 import { messagesData } from './data.js';
+import './styles.css';
+
+const items = messagesData.messages ?? [];
+
+const loopItems = [...items, ...items];
+
 ---
 
-<section class="w-full py-16 lg:py-24 ">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="text-left mb-12">
-      <h2 class="text-3xl lg:text-4xl font-bold text-neutral-100 mb-4">
-        Mensajes y dedicatoria
-      </h2>
-    </div>
+<section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <h2 class="text-5xl font-bold text-neutral-100 text-left">Mensajes y dedicatoria</h2>
 
-    <div class="marquee-container relative overflow-hidden mask-gradient-lr">
-      <div
-        class="marquee-track flex gap-6 animate-marquee"
-        style="width: calc(200% + 1.5rem)"
-      >
-        <!-- First set of messages -->
-        <div class="flex gap-6 min-w-0 shrink-0">
-          {messagesData.messages.map((message) => (
-            <article class="border-[1px] border-[#383848] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] p-6 w-[484px] h-[295px] flex-shrink-0">
-              <div class="space-y-4">
-                <img src={messagesData.icon} alt="Coin" />
-                <p class="text-[#FFFFFF] leading-relaxed">
-                  "{message.text}"
-                </p>
-                <p class="mt-4">
-                  <strong class="text-[#FFFFFF] font-semibold text-lg">{message.author}</strong> - <span class="text-[#FFFFFF] text-sm">{message.date}</span>
-                </p>
-              </div>
-            </article>
-          ))}
-        </div>
-      </div>
+  <div class="overflow-x-hidden mask-gradient-lr pt-20 pb-20 slider">
+    <div class="slides flex flex-nowrap gap-[30px] w-[max-content] will-change-transform">
+      {loopItems.map((m, i) => (
+        <article
+          class="article group flex-none w-[484px]"
+          aria-hidden={i >= items.length}
+          id="messages"
+        >
+          <div class="space-y-4">
+            <img src={messagesData.icon} alt="" class="coin transform-gpu group-hover:animate-coin-jump" />
+            <p class="text-white leading-relaxed">"{m.text}"</p>
+            <p class="mt-4">
+              <strong class="text-white font-semibold text-lg">{m.author}</strong>
+              {" "}-{" "}
+              <span class="text-white/90 text-sm">{m.date}</span>
+            </p>
+          </div>
+        </article>
+      ))}
     </div>
   </div>
 </section>
+
+<audio id="coin-sound" src={messagesData.sounds.coin} preload="auto"></audio>
+
+<script>
+  const articles = document.querySelectorAll("#messages");
+  const audioEl = document.querySelector("#coin-sound");
+
+  let audioUnlocked = false;
+
+  function unlockOnce() {
+    if (audioEl instanceof HTMLAudioElement) {
+      const p = audioEl.play();
+      if (p && typeof p.then === "function") {
+        p.then(() => {
+          audioEl.pause();
+          audioEl.currentTime = 0;
+          audioUnlocked = true;
+        }).catch(() => {
+          console.log('audio bloqueado -_-')
+        });
+      }
+    }
+    window.removeEventListener("pointerdown", unlockOnce);
+    window.removeEventListener("touchstart", unlockOnce);
+    window.removeEventListener("keydown", unlockOnce);
+  }
+  window.addEventListener("pointerdown", unlockOnce, { once: true, passive: true });
+  window.addEventListener("touchstart", unlockOnce, { once: true, passive: true });
+  window.addEventListener("keydown", unlockOnce, { once: true });
+
+  articles.forEach((a) => {
+    a.addEventListener("pointerenter", () => {
+      if (!(audioEl instanceof HTMLAudioElement)) return;
+      if (!audioUnlocked) return;
+
+      const ch = audioEl.cloneNode(true);
+      if (ch instanceof HTMLAudioElement) {
+        ch.volume = audioEl.volume;
+        ch.play().catch(() => {});
+        ch.addEventListener("ended", () => ch.remove());
+        document.body.appendChild(ch);
+      }
+    }, { passive: true });
+  });
+</script>
