@@ -48,7 +48,7 @@ const { heading, subheading, description } = heroData;
         class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-12"
       >
         <Button variant="primary"> Donar al Paypal </Button>
-        <Button variant="secondary"> Ver Codepen</Button>
+        <Button id="codepen" variant="secondary"> Ver Codepen</Button>
       </div>
     </div>
   </div>
@@ -137,3 +137,12 @@ const { heading, subheading, description } = heroData;
     </div>
   </div>
 </section>
+
+<script>
+  import { heroData } from "./data";
+
+  const button_codepen = document.querySelector("#codepen");
+  button_codepen?.addEventListener?.("click", () => {
+    window.open(heroData.codepen_website, "_blank", "noopener,noreferrer");
+  });
+</script>

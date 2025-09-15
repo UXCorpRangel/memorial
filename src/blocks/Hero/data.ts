@@ -2,6 +2,7 @@ export const heroData = {
   heading: "Un lugar para",
   subheading: "recordar y agradecer",
   description: "todo lo que Tyto_Mix contruyó",
+  codepen_website: "https://codepen.io/jagcruz",
   images: [
     {
       src: "/Tyto-portrait.webp",
