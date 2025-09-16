@@ -11,7 +11,8 @@ const config: LandingConfig = {
   autoDiscover: true,
   order: [
     "Header",
-    "Hero", 
+    "Hero",
+    "Countdown",
     "Banner",
     "Works",
     "Donations",
