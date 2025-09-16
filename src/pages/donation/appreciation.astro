@@ -1,0 +1,67 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Header from "../../blocks/Header";
+import { Image } from "astro:assets";
+import Button from "@/components/Button.astro";
+---
+
+<BaseLayout title="Memorial Landing">
+  <Header />
+  <section class="flex flex-col items-center gap-8 max-w-5xl mx-auto">
+    <Image
+      src="/Sandy-congrats.webp"
+      width={386}
+      height={386}
+      alt="Sandy congratulation"
+    />
+    <h1 class="text-white text-center text-2xl lg:text-5xl font-bold">
+      Muchas gracias por tu donación
+    </h1>
+    <p class="text-white text-center text-lg">
+      Tu aporte significa mucho para la familia de Jaime y para toda la
+      comunidad de UXCorp. Además, puedes dejar un mensaje para Tyto, que
+      quedará publicado en la web como parte del recuerdo y el cariño que
+      seguimos compartiendo con él. 🌟
+    </p>
+
+    <form
+      action="/donation/appreciation"
+      method="POST"
+      class="w-full space-y-4 lg:space-y-8"
+    >
+      <div class="grid lg:grid-cols-2">
+        <label for="fullname" class="text-white"> Nombre y apellido</label>
+        <input
+          type="text"
+          id="fullname"
+          name="fullname"
+          required
+          class="text-white bg-background-default border border-white p-2"
+        />
+      </div>
+      <div class="grid lg:grid-cols-2">
+        <label for="message" class="text-white">Mensaje</label>
+        <textarea
+          id="message"
+          name="message"
+          rows="4"
+          class="text-white bg-background-default border border-white p-2"
+        ></textarea>
+      </div>
+      <div class="flex justify-center gap-10">
+        <Button variant="secondary" size="large" type="submit" id="back-home"
+          >Volver al home</Button
+        >
+        <Button variant="primary" size="large" type="submit">Enviar</Button>
+      </div>
+    </form>
+  </section>
+</BaseLayout>
+
+<script>
+  const backHomeButton = document.getElementById("back-home");
+  backHomeButton.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location.href = "/";
+  });
+</script>

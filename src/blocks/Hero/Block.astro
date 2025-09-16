@@ -13,39 +13,33 @@ const { heading, subheading, description } = heroData;
   class="flex flex-col lg:flex-row justify-center items-center min-h-[calc(100dvh-90px)] max-w-screen-2xl mx-auto h-full gap-10 lg:gap-4"
 >
   <div>
-    <div
-      class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_60%_at_50%_0%,#491012_0%,#07091E_100%)]"
-    >
-    </div>
-    <div>
-      <div class="space-y-6">
-        <Image
-          src="/Tyto-Sandy.webp"
-          alt="Tyto Sandy"
-          width="124"
-          height="163"
-          class="object-cover"
-        />
-        <h1
-          class="text-4xl sm:text-5xl lg:text-6xl font-bold bg-clip-text text-white text-transparent animate-neon"
-        >
-          {heading}
-        </h1>
-        <p
-          class="text-4xl sm:text-5xl lg:text-6xl stroke-white text-transparent animate-neon"
-        >
-          {subheading}
-        </p>
-        <p class="text-2xl text-white">
-          {description}
-        </p>
-      </div>
-      <div
-        class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-12"
+    <div class="space-y-6">
+      <Image
+        src="/Tyto-Sandy.webp"
+        alt="Tyto Sandy"
+        width="124"
+        height="163"
+        class="object-cover"
+      />
+      <h1
+        class="text-4xl sm:text-5xl lg:text-6xl font-bold bg-clip-text text-white text-transparent animate-neon"
       >
-        <Button variant="primary"> Donar al Paypal </Button>
-        <Button id="codepen" variant="secondary"> Ver Codepen</Button>
-      </div>
+        {heading}
+      </h1>
+      <p
+        class="text-4xl sm:text-5xl lg:text-6xl stroke-white text-transparent animate-neon"
+      >
+        {subheading}
+      </p>
+      <p class="text-2xl text-white">
+        {description}
+      </p>
+    </div>
+    <div
+      class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-12"
+    >
+      <Button variant="primary"> Donar al Paypal </Button>
+      <Button id="codepen" variant="secondary"> Ver Codepen</Button>
     </div>
   </div>
   <div class="flex-1 relative space-y-4 h-full">
