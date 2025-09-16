@@ -1,0 +1,137 @@
+---
+import Button from "@components/Button.astro";
+import { countdownData } from "./data.js";
+---
+
+<section class="flex flex-col items-center justify-center gap-6 pt-32">
+  <img src="tyto_and_sandy.png" alt="tyto_and_sandy" class="w-auto h-[180px]" />
+  <div class="flex flex-row flex-wrap gap-4 justify-center items-center">
+    <section class="flex flex-col gap-4 items-center justify-center">
+      <figure
+        class="h-[122px] w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
+      >
+        <p id="countdown_days" class="text-[64px] font-[500] text-white"></p>
+      </figure>
+      <span class="text-[16px] text-white font-[400]">Dias</span>
+    </section>
+    <section class="flex flex-col gap-4 items-center justify-center">
+      <figure
+        class="h-[122px] w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
+      >
+        <p id="countdown_hours" class="text-[64px] font-[500] text-white"></p>
+      </figure>
+      <span class="text-[16px] text-white font-[400]">Horas</span>
+    </section>
+    <section class="flex flex-col gap-4 items-center justify-center">
+      <figure
+        class="h-[122px] w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
+      >
+        <p id="countdown_min" class="text-[64px] font-[500] text-white"></p>
+      </figure>
+      <span class="text-[16px] text-white font-[400]">Min</span>
+    </section>
+    <section class="flex flex-col gap-4 items-center justify-center">
+      <figure
+        class="h-[122px] w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
+      >
+        <p id="countdown_seg" class="text-[64px] font-[500] text-white"></p>
+      </figure>
+      <span class="text-[16px] text-white font-[400]">Seg</span>
+    </section>
+  </div>
+  <p class="text-[48px] text-white font-bold text-center">
+    {countdownData.title}
+  </p>
+  <p
+    class="text-center font-[400] text-white text-[18px] leading-relaxed whitespace-pre-line"
+  >
+    {countdownData.description}
+  </p>
+  <div class="flex items-center gap-6 flex-wrap flex-col lg:flex-row">
+    <p class="text-white font-[400]">Próximo</p>
+    <div
+      class="py-1 px-4 border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
+    >
+      <p id="next_date" class="text-white"></p>
+    </div>
+    <div
+      class="py-1 px-4 border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
+    >
+      <p id="next_hour" class="text-white"></p>
+    </div>
+  </div>
+  <Button id="codepen" variant="secondary">Ver agenda</Button>
+</section>
+
+<script>
+  import { countdownData } from "./data";
+
+  const target = new Date(countdownData.target_date);
+
+  const elements = {
+    days: document.getElementById("countdown_days"),
+    hours: document.getElementById("countdown_hours"),
+    minutes: document.getElementById("countdown_min"),
+    seconds: document.getElementById("countdown_seg"),
+    nextDate: document.getElementById("next_date"),
+    nextHour: document.getElementById("next_hour"),
+  };
+
+  function formatNumber(n: number) {
+    return String(n).padStart(2, "0");
+  }
+
+  function formatDate(date: Date) {
+    const day = formatNumber(date.getDate());
+    const month = date.toLocaleString("es-ES", { month: "short" });
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
+  }
+
+  function formatTime(date: Date) {
+    const hours = formatNumber(date.getHours());
+    const minutes = formatNumber(date.getMinutes());
+    return `A las ${hours}:${minutes}`;
+  }
+
+  function updateCountdown() {
+    const now = new Date().getTime();
+    const distance = target.getTime() - now;
+
+    if (
+      !elements.days ||
+      !elements.hours ||
+      !elements.minutes ||
+      !elements.seconds
+    )
+      return;
+
+    if (distance <= 0) {
+      elements.days.textContent = "00";
+      elements.hours.textContent = "00";
+      elements.minutes.textContent = "00";
+      elements.seconds.textContent = "00";
+      clearInterval(intervalId);
+      return;
+    }
+
+    const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    const hours = Math.floor(
+      (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+    );
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    elements.days.textContent = formatNumber(days);
+    elements.hours.textContent = formatNumber(hours);
+    elements.minutes.textContent = formatNumber(minutes);
+    elements.seconds.textContent = formatNumber(seconds);
+
+    // Actualizar fecha/hora también si se necesita
+    if (elements.nextDate) elements.nextDate.textContent = formatDate(target);
+    if (elements.nextHour) elements.nextHour.textContent = formatTime(target);
+  }
+
+  const intervalId = setInterval(updateCountdown, 1000);
+  updateCountdown();
+</script>
