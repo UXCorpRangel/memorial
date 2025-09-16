@@ -1,19 +1,25 @@
 ---
 interface Props extends astroHTML.JSX.ButtonHTMLAttributes {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "twitch";
+  size?: "small" | "medium" | "large";
 }
-const { variant, ...rest } = Astro.props;
+const { variant, size = "large", ...rest } = Astro.props;
 ---
 
 <button
   {...rest}
   class:list={[
-    "relative text-lg lg:text-xl font-semibold px-10 py-5 text-white hover:outline outline-offset-0 hover:outline-offset-4 transition-all duration-100 before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white/.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:[transition:background-position_0s_ease] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1000ms]",
+    "relative items-center font-semibold text-white hover:outline outline-offset-0 hover:outline-offset-4 transition-all duration-100 before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white/.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:[transition:background-position_0s_ease] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1000ms]",
     {
       "bg-[linear-gradient(90deg,#F3384A_0%,#972123_100%)] hover:bg-[linear-gradient(90deg,#972123_0%,#F3384A_100%)] outline-primary":
         variant === "primary",
       "bg-transparent border border-white hover:underline outline-white":
         variant === "secondary",
+      "bg-indigo-500 border border-white hover:underline outline-white":
+        variant === "twitch",
+      "text-sm lg:text-base px-5 py-2.5": size === "small",
+      "text-base lg:text-lg px-7.5 py-3": size === "medium",
+      "text-lg lg:text-xl px-10 py-5": size === "large",
     },
     rest.class,
   ]}
@@ -23,7 +29,7 @@ const { variant, ...rest } = Astro.props;
       <div class="absolute -inset-2 rounded bg-gradient-to-r from-[#F3384A] to-[#F3384A] opacity-25 blur" />
     )
   }
-  <div class="relative">
+  <div class="relative flex gap-2">
     <slot />
   </div>
 </button>

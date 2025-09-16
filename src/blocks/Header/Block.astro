@@ -1,8 +1,8 @@
 ---
-
+import SigninButton from "@/components/SigninButton.astro";
 ---
 
-<header class="w-full flex justify-center items-center py-6">
+<header class="w-full flex justify-center items-center py-6 relative">
   <div
     class="flex justify-center items-center text-white cursor-pointer gap-2 group tyto-logo-hover-svg scale-150"
   >
@@ -27,4 +27,7 @@
       >Gutiérrez
     </span>
   </div>
+  <SigninButton server:defer>
+    <span slot="fallback"></span>
+  </SigninButton>
 </header>
