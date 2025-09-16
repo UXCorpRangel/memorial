@@ -24,7 +24,7 @@ export const worksData: WorksData = {
     {
       title: "CodePen Trading Card",
       type: "preview",
-      url: "https://codepen.io/jagcruz/pen/xxNdRW",
+      url: "https://codepen.io/jagcruz/pen/xxNdRWr",
     },
     {
       title: "Codepen Holographic Trading Card",

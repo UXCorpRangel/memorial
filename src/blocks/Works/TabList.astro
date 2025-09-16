@@ -71,29 +71,27 @@ const { works } = Astro.props;
             data-project-type={project.type}
           >
             {project.type === "cards" && project.images && (
-              <section class="deck-wrapper">
-                <div
-                  id={index === 0 ? "fan-deck" : `fan-deck-${index}`}
-                  class="card-fan"
-                >
-                  {project.images.map((image, cardIndex) => (
-                    <article class="card">
-                      <img
-                        src={image}
-                        alt={`Carta ${cardIndex + 1} - ${project.title}`}
-                        class="card-face"
-                      />
-                    </article>
-                  ))}
-                </div>
-              </section>
+              <div
+                id={index === 0 ? "fan-deck" : `fan-deck-${index}`}
+                class="card-fan"
+              >
+                {project.images.map((image, cardIndex) => (
+                  <article class="card">
+                    <img
+                      src={image}
+                      alt={`Carta ${cardIndex + 1} - ${project.title}`}
+                      class="card-face"
+                    />
+                  </article>
+                ))}
+              </div>
             )}
 
             {project.type === "preview" && project.url && (
               <section class="codepen-wrapper w-full max-w-4xl">
                 <div class="codepen-embed-container">
                   <iframe
-                    height="400"
+                    height="600"
                     style="width: 100%;"
                     scrolling="no"
                     title={project.title}
