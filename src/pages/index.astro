@@ -1,12 +1,12 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro';
-import { getResolvedSections } from '@blocks/registry.js';
+import BaseLayout from "@layouts/BaseLayout.astro";
+import { getResolvedSections } from "@blocks/registry.js";
 
 const sections = getResolvedSections();
 ---
 
 <BaseLayout title="Memorial Landing">
-  <main class="overflow-x-hidden">
+  <main class="overflow-x-hidden px-4 md:px-6 lg:px-12">
     {sections.map(({ Component, props }) => <Component {...props} />)}
   </main>
 </BaseLayout>
