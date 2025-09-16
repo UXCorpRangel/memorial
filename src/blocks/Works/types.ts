@@ -3,4 +3,5 @@ export interface Project {
   images?: string[];
   url?: string;
   type: "cards" | "preview";
+  zoom?: number;
 }

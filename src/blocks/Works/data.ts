@@ -16,20 +16,31 @@ export const worksData: WorksData = {
       ],
       type: "cards",
     },
+
     {
-      title: "CodePen Waves",
-      type: "preview",
-      url: "https://codepen.io/jagcruz/pen/emObbJd",
-    },
-    {
-      title: "CodePen Trading Card",
+      title: "Trading Card",
       type: "preview",
       url: "https://codepen.io/jagcruz/pen/xxNdRWr",
+      zoom: 0.5,
     },
     {
-      title: "Codepen Holographic Trading Card",
+      title: "Card Web",
+      type: "preview",
+      url: "https://codepen.io/jagcruz/pen/bGPXevR",
+      zoom: 1,
+    },
+    {
+      title: "Holographic  Card",
       type: "preview",
       url: "https://codepen.io/jagcruz/pen/JjqzGPG",
+      zoom: 1,
+    },
+
+    {
+      title: "3D Sphere Intersection",
+      type: "preview",
+      url: "https://codepen.io/jagcruz/pen/oggJYzP",
+      zoom: 1,
     },
   ],
 };
