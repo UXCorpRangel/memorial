@@ -7,7 +7,7 @@ import Button from "@/components/Button.astro";
 
 <BaseLayout title="Memorial Landing">
   <Header />
-  <section class="flex flex-col items-center gap-8 max-w-5xl mx-auto">
+  <section class="flex flex-col items-center gap-12 max-w-5xl mx-auto">
     <Image
       src="/Sandy-congrats.webp"
       width={386}
@@ -27,10 +27,12 @@ import Button from "@/components/Button.astro";
     <form
       action="/donation/appreciation"
       method="POST"
-      class="w-full space-y-4 lg:space-y-8"
+      class="w-full lg:max-w-3xl space-y-4 lg:space-y-12"
     >
       <div class="grid lg:grid-cols-2">
-        <label for="fullname" class="text-white"> Nombre y apellido</label>
+        <label for="fullname" class="text-white text-xl">
+          Nombre y apellido</label
+        >
         <input
           type="text"
           id="fullname"
@@ -40,7 +42,7 @@ import Button from "@/components/Button.astro";
         />
       </div>
       <div class="grid lg:grid-cols-2">
-        <label for="message" class="text-white">Mensaje</label>
+        <label for="message" class="text-white text-xl">Mensaje</label>
         <textarea
           id="message"
           name="message"
@@ -49,10 +51,10 @@ import Button from "@/components/Button.astro";
         ></textarea>
       </div>
       <div class="flex justify-center gap-10">
+        <Button variant="primary" size="large" type="submit">Enviar</Button>
         <Button variant="secondary" size="large" type="submit" id="back-home"
           >Volver al home</Button
         >
-        <Button variant="primary" size="large" type="submit">Enviar</Button>
       </div>
     </form>
   </section>

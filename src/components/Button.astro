@@ -17,9 +17,9 @@ const { variant, size = "large", ...rest } = Astro.props;
         variant === "secondary",
       "bg-indigo-500 border border-white hover:underline outline-white":
         variant === "twitch",
-      "text-sm lg:text-base px-5 py-2.5": size === "small",
-      "text-base lg:text-lg px-7.5 py-3": size === "medium",
-      "text-lg lg:text-xl px-10 py-5": size === "large",
+      "text-sm lg:text-base px-2 py-1 lg:px-6 lg:py-3": size === "small",
+      "text-base lg:text-lg px-6 py-3 lg:px-8 lg:py-4": size === "medium",
+      "text-lg lg:text-xl px-8 py-4 lg:px-10 lg:py-5": size === "large",
     },
     rest.class,
   ]}
