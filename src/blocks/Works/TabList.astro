@@ -59,7 +59,7 @@ const { works } = Astro.props;
     {
       works.projects.map((project, index) => (
         <div
-          class={`h-[60dvh] flex flex-col gap-8 justify-center items-center tab-panel w-full  transition-all duration-400 ${
+          class={`lg:h-[60dvh] flex flex-col gap-8 justify-center items-center tab-panel w-full  transition-all duration-400 ${
             index === 0
               ? "opacity-100 visible animate-fade-in-up z-10"
               : "opacity-0 invisible absolute top-0 left-0 z-0"
