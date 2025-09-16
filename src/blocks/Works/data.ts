@@ -1,47 +1,35 @@
-import type { Project } from './types.js';
+import type { Project } from "./types.js";
 
-export const worksData: { projects: Project[], cards: string[] } = {
+export type WorksData = {
+  author: string;
+  projects: Project[];
+};
+export const worksData: WorksData = {
+  author: "https://codepen.io/jagcruz",
   projects: [
     {
       title: "Cartas unicornio",
-      category: "Trabajo Social",
-      description: "Un proyecto dedicado a mejorar las condiciones de vida de la comunidad local, enfocándose en educación y desarrollo sostenible.",
-      image: {
-        src: "/favicon.svg",
-        alt: "Proyecto Comunidad"
-      }
+      images: [
+        "/cards/card-backend.png",
+        "/cards/card-hartyto.png",
+        "/cards/card-gnomo.png",
+      ],
+      type: "cards",
     },
     {
-      title: "Codepen",
-      category: "Expresión Artística",
-      description: "Una iniciativa cultural que promovía el arte local y la preservación de tradiciones culturales a través de talleres y exposiciones.",
-      image: {
-        src: "/favicon.svg",
-        alt: "Proyecto Arte y Cultura"
-      }
+      title: "CodePen Waves",
+      type: "preview",
+      url: "https://codepen.io/jagcruz/pen/emObbJd",
     },
     {
-      title: "Codepen",
-      category: "Educación",
-      description: "Programa educativo inclusivo que buscaba brindar oportunidades de aprendizaje a comunidades desfavorecidas.",
-      image: {
-        src: "/favicon.svg",
-        alt: "Proyecto Educación para Todos"
-      }
+      title: "CodePen Trading Card",
+      type: "preview",
+      url: "https://codepen.io/jagcruz/pen/xxNdRW",
     },
     {
-      title: "Codepen",
-      category: "Sostenibilidad",
-      description: "Iniciativa ambiental enfocada en la conservación y protección del medio ambiente local a través de acciones concretas.",
-      image: {
-        src: "/favicon.svg",
-        alt: "Proyecto Medio Ambiente"
-      }
-    }
+      title: "Codepen Holographic Trading Card",
+      type: "preview",
+      url: "https://codepen.io/jagcruz/pen/JjqzGPG",
+    },
   ],
-  cards: [
-    '/cards/card-backend.png',
-    '/cards/card-hartyto.png',
-    '/cards/card-gnomo.png'
-  ]
 };

@@ -1,157 +1,309 @@
 ---
-import Button from '@/components/Button.astro';
-import type { Project } from './types.js';
-import './styles.css';
+import Button from "@/components/Button.astro";
+import type { Project } from "./types.js";
+import "./styles.css";
+import type { WorksData } from "./data";
 
 export interface Props {
-  works: {
-    projects: Project[];
-    cards: string[];
-  };
+  works: WorksData;
 }
 
 const { works } = Astro.props;
 ---
 
-<div class="h-fit flex flex-col lg:flex-row gap-32">
+<section class="h-fit flex flex-col lg:flex-row gap-32">
   <!-- Tabs verticales -->
-  <div 
+  <section
     class="flex flex-col space-y-6"
     role="tablist"
     aria-label="Lista de proyectos"
   >
-    {works.projects.map((project, index) => (
-      <button
-        class={`w-[285px] tab-button text-center p-4 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#972123] ${
-          index === 0 
-            ? 'border-[2.43px] border-solid [border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]' 
-            : 'border-[0.81px] border-solid border-[#383848] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]'
-        }`}
-        role="tab"
-        aria-selected={index === 0 ? "true" : "false"}
-        aria-controls={`panel-${index}`}
-        id={`tab-${index}`}
-        data-tab-index={index}
-      >
-        <p class="text-[16px] text-white font-bold opacity-80">{project.title}</p>
-      </button>
-    ))}
-  </div>
-  
+    {
+      works.projects.map((project, index) => (
+        <button
+          class={`w-[285px] tab-button text-center p-4 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#972123] ${
+            index === 0
+              ? "border-[2.43px] border-solid [border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]"
+              : "border-[0.81px] border-solid border-[#383848] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]"
+          }`}
+          role="tab"
+          aria-selected={index === 0 ? "true" : "false"}
+          aria-controls={`panel-${index}`}
+          id={`tab-${index}`}
+          data-tab-index={index}
+        >
+          <p class="text-[16px] text-white font-bold opacity-80">
+            {project.title}
+          </p>
+        </button>
+      ))
+    }
+  </section>
+
   <!-- Panel de contenido -->
-  <div class="relative min-h-96 w-full flex-1">
+  <section class="relative min-h-96 w-full flex-1">
     <div
       aria-hidden="true"
       class="pointer-events-none absolute bottom-[-20vh] left-1/2 -translate-x-1/2
-            h-[75vh] w-[50vw] -z-10">
+            h-[75vh] w-[50vw] -z-10"
+    >
       <div
         class="absolute bottom-0 left-1/2 -translate-x-1/2
               h-[75vh] w-[50vw]
-              bg-[radial-gradient(50%_50%_at_50%_50%,#383848_0%,#07091E_100%)]">
+              bg-[radial-gradient(50%_50%_at_50%_50%,#383848_0%,#07091E_100%)]"
+      >
       </div>
     </div>
-    {works.projects.map((project, index) => (
-      <div
-        class={`flex flex-col justify-center items-center tab-panel absolute inset-0 transition-all duration-400 ${
-          index === 0 ? 'opacity-100 animate-fade-in-up' : 'opacity-0 pointer-events-none'
-        }`}
-        role="tabpanel"
-        aria-labelledby={`tab-${index}`}
-        id={`panel-${index}`}
-        tabindex="0"
-      >
-        <section class="deck-wrapper">
-          <div id="fan-deck" class="card-fan">
-            {works.cards.map((card, index) => (
-              <article class="card">
-                <img src={card} alt={`Carta ${index + 1}`} class="card-face" />
-              </article>
-            ))}
+
+    <div id="content" class="relative w-full h-full">
+      {
+        works.projects.map((project, index) => (
+          <div
+            class={`flex flex-col justify-center items-center tab-panel w-full h-full transition-all duration-400 ${
+              index === 0
+                ? "opacity-100 visible animate-fade-in-up z-10"
+                : "opacity-0 invisible absolute top-0 left-0 z-0"
+            }`}
+            role="tabpanel"
+            tabindex="0"
+            aria-labelledby={`tab-${index}`}
+            id={`panel-${index}`}
+            data-project-type={project.type}
+          >
+            {project.type === "cards" && project.images && (
+              <section class="deck-wrapper">
+                <div
+                  id={index === 0 ? "fan-deck" : `fan-deck-${index}`}
+                  class="card-fan"
+                >
+                  {project.images.map((image, cardIndex) => (
+                    <article class="card">
+                      <img
+                        src={image}
+                        alt={`Carta ${cardIndex + 1} - ${project.title}`}
+                        class="card-face"
+                      />
+                    </article>
+                  ))}
+                </div>
+              </section>
+            )}
+
+            {project.type === "preview" && project.url && (
+              <section class="codepen-wrapper w-full max-w-4xl">
+                <div class="codepen-embed-container">
+                  <iframe
+                    height="400"
+                    style="width: 100%;"
+                    scrolling="no"
+                    title={project.title}
+                    src={
+                      project.url.replace("/pen/", "/embed/") +
+                      "?default-tab=result&theme-id=dark"
+                    }
+                    frameborder="no"
+                    loading="lazy"
+                    allowtransparency="true"
+                    allowfullscreen="true"
+                  >
+                    Ver el Pen {project.title} por jagcruz en CodePen.
+                  </iframe>
+                </div>
+              </section>
+            )}
+
+            <Button variant="secondary">
+              {project.type === "cards" ? "Ver proyecto" : "Ver en CodePen"}
+            </Button>
           </div>
-        </section>
-        <Button variant='secondary'>
-          Ver proyecto
-        </Button>
-      </div>
-    ))}
-  </div>
-</div>
+        ))
+      }
+    </div>
+  </section>
+</section>
+
+<script async src="https://public.codepenassets.com/embed/index.js"></script>
 
 <script>
   class TabController {
-    private tabs: HTMLElement[];
-    private panels: HTMLElement[];
-    private currentTab = 0;
-
     constructor() {
-      this.tabs = Array.from(document.querySelectorAll('.tab-button')) as HTMLElement[];
-      this.panels = Array.from(document.querySelectorAll('.tab-panel')) as HTMLElement[];
-      
+      this.tabs = Array.from(document.querySelectorAll(".tab-button"));
+      this.panels = Array.from(document.querySelectorAll(".tab-panel"));
+      this.currentTab = 0;
+      this.projects = this.getProjectsFromDOM();
+
       this.init();
+      this.setupIntersectionObservers();
+    }
+
+    getProjectsFromDOM() {
+      return this.panels.map((panel) => ({
+        type: panel.dataset.projectType,
+      }));
     }
 
     init() {
       // Click handlers
       this.tabs.forEach((tab, index) => {
-        tab.addEventListener('click', () => this.showTab(index));
+        tab.addEventListener("click", () => this.showTab(index));
       });
 
       // Keyboard navigation
       this.tabs.forEach((tab, index) => {
-        tab.addEventListener('keydown', (e) => this.handleKeydown(e, index));
+        tab.addEventListener("keydown", (e) => this.handleKeydown(e, index));
       });
     }
 
-    showTab(index: number) {
-      // Hide current panel with fade out
-      const currentPanel = this.panels[this.currentTab];
-      currentPanel.classList.remove('animate-fade-in-up');
-      currentPanel.classList.add('animate-fade-out-down');
-      
-      setTimeout(() => {
-        currentPanel.classList.add('opacity-0', 'pointer-events-none');
-        currentPanel.classList.remove('animate-fade-out-down');
-
-        // Update tab states
-        this.tabs[this.currentTab].setAttribute('aria-selected', 'false');
-        this.tabs[this.currentTab].classList.remove('border-[2.43px]', 'border-solid', '[border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1]', 'bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]');
-        this.tabs[this.currentTab].classList.add('border-[0.81px]', 'border-solid', 'border-[#383848]', 'bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]');
-
-        // Show new panel with fade in
-        this.currentTab = index;
-        const newPanel = this.panels[this.currentTab];
-        newPanel.classList.remove('opacity-0', 'pointer-events-none');
-        newPanel.classList.add('animate-fade-in-up');
-
-        // Update new tab state
-        this.tabs[this.currentTab].setAttribute('aria-selected', 'true');
-        this.tabs[this.currentTab].classList.remove('border-[0.81px]', 'border-solid', 'border-[#383848]', 'bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]');
-        this.tabs[this.currentTab].classList.add('border-[2.43px]', 'border-solid', '[border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1]', 'bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]');
-      }, 150);
+    setupIntersectionObservers() {
+      // Configurar intersection observers para todas las fan-deck
+      this.panels.forEach((panel, index) => {
+        const projectType = panel.dataset.projectType;
+        if (projectType === "cards") {
+          const fanDeck = panel.querySelector(
+            `#${index === 0 ? "fan-deck" : `fan-deck-${index}`}`
+          );
+          if (fanDeck) {
+            const io = new IntersectionObserver(
+              (entries) => {
+                entries.forEach((e) => {
+                  if (e.isIntersecting) {
+                    fanDeck.classList.add("is-visible");
+                  } else {
+                    fanDeck.classList.remove("is-visible");
+                  }
+                });
+              },
+              { threshold: 0.4 }
+            );
+            io.observe(fanDeck);
+          }
+        }
+      });
     }
 
-    handleKeydown(e: KeyboardEvent, index: number) {
+    showTab(index) {
+      if (index === this.currentTab) return;
+
+      // Hide current panel
+      const currentPanel = this.panels[this.currentTab];
+      currentPanel.classList.remove(
+        "opacity-100",
+        "visible",
+        "animate-fade-in-up",
+        "z-10"
+      );
+      currentPanel.classList.add(
+        "opacity-0",
+        "invisible",
+        "absolute",
+        "top-0",
+        "left-0",
+        "z-0"
+      );
+
+      // Update tab states
+      this.updateTabState(this.currentTab, false);
+
+      // Show new panel
+      this.currentTab = index;
+      const newPanel = this.panels[this.currentTab];
+
+      // Small delay to ensure smooth transition
+      setTimeout(() => {
+        newPanel.classList.remove(
+          "opacity-0",
+          "invisible",
+          "absolute",
+          "top-0",
+          "left-0",
+          "z-0"
+        );
+        newPanel.classList.add(
+          "opacity-100",
+          "visible",
+          "animate-fade-in-up",
+          "z-10"
+        );
+
+        // Update new tab state
+        this.updateTabState(this.currentTab, true);
+
+        // Trigger animation for cards if needed
+        const projectType = this.projects[this.currentTab]?.type;
+        if (projectType === "cards") {
+          this.triggerCardAnimation(index);
+        }
+      }, 50);
+    }
+
+    updateTabState(index, isActive) {
+      const tab = this.tabs[index];
+      tab.setAttribute("aria-selected", isActive.toString());
+
+      if (isActive) {
+        tab.classList.remove(
+          "border-[0.81px]",
+          "border-solid",
+          "border-[#383848]",
+          "bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]"
+        );
+        tab.classList.add(
+          "border-[2.43px]",
+          "border-solid",
+          "[border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1]",
+          "bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]"
+        );
+      } else {
+        tab.classList.remove(
+          "border-[2.43px]",
+          "border-solid",
+          "[border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1]",
+          "bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]"
+        );
+        tab.classList.add(
+          "border-[0.81px]",
+          "border-solid",
+          "border-[#383848]",
+          "bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]"
+        );
+      }
+    }
+
+    triggerCardAnimation(index) {
+      const fanDeck = document.querySelector(
+        `#${index === 0 ? "fan-deck" : `fan-deck-${index}`}`
+      );
+      if (fanDeck) {
+        // Reiniciar la animación
+        fanDeck.classList.remove("is-visible");
+        setTimeout(() => {
+          fanDeck.classList.add("is-visible");
+        }, 100);
+      }
+    }
+
+    handleKeydown(e, index) {
       let nextIndex = index;
 
       switch (e.key) {
-        case 'ArrowDown':
+        case "ArrowDown":
           e.preventDefault();
           nextIndex = (index + 1) % this.tabs.length;
           break;
-        case 'ArrowUp':
+        case "ArrowUp":
           e.preventDefault();
           nextIndex = index === 0 ? this.tabs.length - 1 : index - 1;
           break;
-        case 'Home':
+        case "Home":
           e.preventDefault();
           nextIndex = 0;
           break;
-        case 'End':
+        case "End":
           e.preventDefault();
           nextIndex = this.tabs.length - 1;
           break;
-        case 'Enter':
-        case ' ':
+        case "Enter":
+        case " ":
           e.preventDefault();
           this.showTab(index);
           return;
@@ -163,23 +315,7 @@ const { works } = Astro.props;
     }
   }
 
-  document.addEventListener('DOMContentLoaded', () => {
+  document.addEventListener("DOMContentLoaded", () => {
     new TabController();
   });
-</script>
-
-<script>
-  const el = document.getElementById('fan-deck');
-  if (el) {
-    const io = new IntersectionObserver((entries) => {
-      entries.forEach((e) => {
-        if (e.isIntersecting) {
-          el.classList.add('is-visible');
-        } else {
-          el.classList.remove('is-visible');
-        }
-      });
-    }, { threshold: 0.4 });
-    io.observe(el);
-  }
 </script>
