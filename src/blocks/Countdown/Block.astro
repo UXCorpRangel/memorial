@@ -8,42 +8,58 @@ import { countdownData } from "./data.js";
   <div class="flex flex-row flex-wrap gap-4 justify-center items-center">
     <section class="flex flex-col gap-4 items-center justify-center">
       <figure
-        class="h-[122px] w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
+        class="w-[80px] h-[80px] lg:h-[122px] lg:w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
       >
-        <p id="countdown_days" class="text-[64px] font-[500] text-white"></p>
+        <p
+          id="countdown_days"
+          class="text-[32px] lg:text-[64px] font-[500] text-white"
+        >
+        </p>
       </figure>
       <span class="text-[16px] text-white font-[400]">Dias</span>
     </section>
     <section class="flex flex-col gap-4 items-center justify-center">
       <figure
-        class="h-[122px] w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
+        class="w-[80px] h-[80px] lg:h-[122px] lg:w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
       >
-        <p id="countdown_hours" class="text-[64px] font-[500] text-white"></p>
+        <p
+          id="countdown_hours"
+          class="text-[32px] lg:text-[64px] font-[500] text-white"
+        >
+        </p>
       </figure>
       <span class="text-[16px] text-white font-[400]">Horas</span>
     </section>
     <section class="flex flex-col gap-4 items-center justify-center">
       <figure
-        class="h-[122px] w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
+        class="w-[80px] h-[80px] lg:h-[122px] lg:w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
       >
-        <p id="countdown_min" class="text-[64px] font-[500] text-white"></p>
+        <p
+          id="countdown_min"
+          class="text-[32px] lg:text-[64px] font-[500] text-white"
+        >
+        </p>
       </figure>
       <span class="text-[16px] text-white font-[400]">Min</span>
     </section>
     <section class="flex flex-col gap-4 items-center justify-center">
       <figure
-        class="h-[122px] w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
+        class="w-[80px] h-[80px] lg:h-[122px] lg:w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
       >
-        <p id="countdown_seg" class="text-[64px] font-[500] text-white"></p>
+        <p
+          id="countdown_seg"
+          class="text-[32px] lg:text-[64px] font-[500] text-white"
+        >
+        </p>
       </figure>
       <span class="text-[16px] text-white font-[400]">Seg</span>
     </section>
   </div>
-  <p class="text-[48px] text-white font-bold text-center">
+  <p class="text-white font-bold text-center text-[24px] lg:text-[48px]">
     {countdownData.title}
   </p>
   <p
-    class="text-center font-[400] text-white text-[18px] leading-relaxed whitespace-pre-line"
+    class="text-center font-[400] text-white text-[14px] lg:text-[18px] leading-relaxed whitespace-pre-line"
   >
     {countdownData.description}
   </p>
