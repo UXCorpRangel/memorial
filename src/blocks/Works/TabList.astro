@@ -123,24 +123,36 @@ const { works } = Astro.props;
 <script async src="https://public.codepenassets.com/embed/index.js"></script>
 
 <script>
+  interface Project {
+    type: string;
+  }
+
   class TabController {
+    private tabs: HTMLElement[];
+    private panels: HTMLElement[];
+    private currentTab: number = 0;
+    private projects: Project[];
+
     constructor() {
-      this.tabs = Array.from(document.querySelectorAll(".tab-button"));
-      this.panels = Array.from(document.querySelectorAll(".tab-panel"));
-      this.currentTab = 0;
+      this.tabs = Array.from(
+        document.querySelectorAll(".tab-button")
+      ) as HTMLElement[];
+      this.panels = Array.from(
+        document.querySelectorAll(".tab-panel")
+      ) as HTMLElement[];
       this.projects = this.getProjectsFromDOM();
 
       this.init();
       this.setupIntersectionObservers();
     }
 
-    getProjectsFromDOM() {
+    private getProjectsFromDOM(): Project[] {
       return this.panels.map((panel) => ({
-        type: panel.dataset.projectType,
+        type: panel.dataset.projectType || "",
       }));
     }
 
-    init() {
+    private init(): void {
       // Click handlers
       this.tabs.forEach((tab, index) => {
         tab.addEventListener("click", () => this.showTab(index));
@@ -152,7 +164,7 @@ const { works } = Astro.props;
       });
     }
 
-    setupIntersectionObservers() {
+    private setupIntersectionObservers(): void {
       // Configurar intersection observers para todas las fan-deck
       this.panels.forEach((panel, index) => {
         const projectType = panel.dataset.projectType;
@@ -179,7 +191,7 @@ const { works } = Astro.props;
       });
     }
 
-    showTab(index) {
+    private showTab(index: number): void {
       if (index === this.currentTab) return;
 
       // Hide current panel
@@ -234,7 +246,7 @@ const { works } = Astro.props;
       }, 50);
     }
 
-    updateTabState(index, isActive) {
+    private updateTabState(index: number, isActive: boolean): void {
       const tab = this.tabs[index];
       tab.setAttribute("aria-selected", isActive.toString());
 
@@ -267,7 +279,7 @@ const { works } = Astro.props;
       }
     }
 
-    triggerCardAnimation(index) {
+    private triggerCardAnimation(index: number): void {
       const fanDeck = document.querySelector(
         `#${index === 0 ? "fan-deck" : `fan-deck-${index}`}`
       );
@@ -280,7 +292,7 @@ const { works } = Astro.props;
       }
     }
 
-    handleKeydown(e, index) {
+    private handleKeydown(e: KeyboardEvent, index: number): void {
       let nextIndex = index;
 
       switch (e.key) {
