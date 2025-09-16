@@ -15,6 +15,7 @@ export const worksData: WorksData = {
         "/cards/card-gnomo.png",
       ],
       type: "cards",
+      url: "https://github.com/UXCorpRangel/ana-cards",
     },
 
     {

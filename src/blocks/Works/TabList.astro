@@ -11,17 +11,17 @@ export interface Props {
 const { works } = Astro.props;
 ---
 
-<section class="h-fit flex flex-col lg:flex-row gap-32">
+<section class="h-fit flex flex-col lg:flex-row gap-12 lg:gap-32">
   <!-- Tabs verticales -->
   <section
-    class="flex flex-col space-y-6"
+    class="flex flex-row gap-6 justify-start overflow-x-auto lg:overflow-x-visible lg:flex-col scrollbar-hide"
     role="tablist"
     aria-label="Lista de proyectos"
   >
     {
       works.projects.map((project, index) => (
         <button
-          class={`w-[285px] tab-button text-center p-4 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#972123] ${
+          class={`flex-none min-w-[285px] max-w-[285px] tab-button text-center p-4 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#972123] ${
             index === 0
               ? "border-[2.43px] border-solid [border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]"
               : "border-[0.81px] border-solid border-[#383848] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]"
@@ -31,6 +31,7 @@ const { works } = Astro.props;
           aria-controls={`panel-${index}`}
           id={`tab-${index}`}
           data-tab-index={index}
+          data-project-url={project.url}
         >
           <p class="text-[16px] text-white font-bold opacity-80">
             {project.title}
@@ -41,7 +42,7 @@ const { works } = Astro.props;
   </section>
 
   <!-- Panel de contenido -->
-  <section class="relative min-h-96 w-full flex-1">
+  <section class="relative min-h-96 w-full flex-1 deck-wrapper">
     <div
       aria-hidden="true"
       class="pointer-events-none absolute bottom-[-20vh] left-1/2 -translate-x-1/2
@@ -55,83 +56,80 @@ const { works } = Astro.props;
       </div>
     </div>
 
-    <div id="content" class="relative w-full h-full">
-      {
-        works.projects.map((project, index) => (
-          <div
-            class={`flex flex-col gap-8 justify-center items-center tab-panel w-full h-full transition-all duration-400 ${
-              index === 0
-                ? "opacity-100 visible animate-fade-in-up z-10"
-                : "opacity-0 invisible absolute top-0 left-0 z-0"
-            }`}
-            role="tabpanel"
-            tabindex="0"
-            aria-labelledby={`tab-${index}`}
-            id={`panel-${index}`}
-            data-project-type={project.type}
-          >
-            {project.type === "cards" && project.images && (
-              <div
-                id={index === 0 ? "fan-deck" : `fan-deck-${index}`}
-                class="card-fan"
-              >
-                {project.images.map((image, cardIndex) => (
-                  <article class="card">
-                    <img
-                      src={image}
-                      alt={`Carta ${cardIndex + 1} - ${project.title}`}
-                      class="card-face"
-                    />
-                  </article>
-                ))}
+    {
+      works.projects.map((project, index) => (
+        <div
+          class={`h-[60dvh] flex flex-col gap-8 justify-center items-center tab-panel w-full  transition-all duration-400 ${
+            index === 0
+              ? "opacity-100 visible animate-fade-in-up z-10"
+              : "opacity-0 invisible absolute top-0 left-0 z-0"
+          }`}
+          role="tabpanel"
+          tabindex="0"
+          aria-labelledby={`tab-${index}`}
+          id={`panel-${index}`}
+          data-project-type={project.type}
+          data-project-url={project.url}
+        >
+          {project.type === "cards" && project.images && (
+            <div
+              id={index === 0 ? "fan-deck" : `fan-deck-${index}`}
+              class="card-fan"
+            >
+              {project.images.map((image, cardIndex) => (
+                <article class="card">
+                  <img
+                    src={image}
+                    alt={`Carta ${cardIndex + 1} - ${project.title}`}
+                    class="card-face"
+                  />
+                </article>
+              ))}
+            </div>
+          )}
+
+          {project.type === "preview" && project.url && (
+            <section class="codepen-wrapper w-full max-w-4xl">
+              <div class="codepen-embed-container">
+                <iframe
+                  height="600"
+                  style="width: 100%;"
+                  scrolling="no"
+                  title={project.title}
+                  src={
+                    project.url.replace("/pen/", "/embed/") +
+                    `?default-tab=result&theme-id=dark&zoom=${project.zoom}`
+                  }
+                  frameborder="no"
+                  loading="lazy"
+                  allowtransparency="true"
+                  allowfullscreen="true"
+                >
+                  Ver el Pen {project.title} por jagcruz en CodePen.
+                </iframe>
               </div>
-            )}
+            </section>
+          )}
 
-            {project.type === "preview" && project.url && (
-              <section class="codepen-wrapper w-full max-w-4xl">
-                <div class="codepen-embed-container">
-                  <iframe
-                    height="600"
-                    style="width: 100%;"
-                    scrolling="no"
-                    title={project.title}
-                    src={
-                      project.url.replace("/pen/", "/embed/") +
-                      `?default-tab=result&theme-id=dark&zoom=${project.zoom}`
-                    }
-                    frameborder="no"
-                    loading="lazy"
-                    allowtransparency="true"
-                    allowfullscreen="true"
-                  >
-                    Ver el Pen {project.title} por jagcruz en CodePen.
-                  </iframe>
-                </div>
-              </section>
-            )}
-
-            <Button variant="secondary">
-              {project.type === "cards" ? "Ver proyecto" : "Ver en CodePen"}
-            </Button>
-          </div>
-        ))
-      }
-    </div>
+          <Button variant="secondary">
+            {project.type === "cards" ? "Ver proyecto" : "Ver en CodePen"}
+          </Button>
+        </div>
+      ))
+    }
   </section>
 </section>
 
 <script async src="https://public.codepenassets.com/embed/index.js"></script>
 
 <script>
-  interface Project {
-    type: string;
-  }
+  import type { Project } from "./types.js";
 
   class TabController {
     private tabs: HTMLElement[];
     private panels: HTMLElement[];
     private currentTab: number = 0;
-    private projects: Project[];
+    private projects: Pick<Project, "type" | "url">[];
 
     constructor() {
       this.tabs = Array.from(
@@ -144,11 +142,27 @@ const { works } = Astro.props;
 
       this.init();
       this.setupIntersectionObservers();
+      this.setupButtons(); // <-- aquí
     }
+    private setupButtons(): void {
+      this.panels.forEach((panel, index) => {
+        const button = panel.querySelector("button") as HTMLButtonElement;
+        if (button) {
+          button.addEventListener("click", () => {
+            const project = this.projects[index];
+            if (!project) return;
 
-    private getProjectsFromDOM(): Project[] {
+            // Abrir URL dependiendo del tipo de proyecto
+            const url = project.url;
+            if (url) window.open(url, "_blank");
+          });
+        }
+      });
+    }
+    private getProjectsFromDOM(): Pick<Project, "type" | "url">[] {
       return this.panels.map((panel) => ({
-        type: panel.dataset.projectType || "",
+        type: (panel.dataset.projectType as Project["type"]) || "",
+        url: panel.dataset.projectUrl || "", // <-- leer la URL
       }));
     }
 
