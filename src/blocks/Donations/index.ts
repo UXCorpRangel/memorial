@@ -2,7 +2,7 @@ import Block from './Block.astro';
 
 export const meta = {
   slug: 'Donations',
-  order: 5,
+  order: 6,
   enabled: true
 };
 

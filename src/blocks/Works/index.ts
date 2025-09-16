@@ -2,7 +2,7 @@ import Block from './Block.astro';
 
 export const meta = {
   slug: 'Works',
-  order: 4,
+  order: 5,
   enabled: true
 };
 

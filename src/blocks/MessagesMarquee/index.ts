@@ -2,7 +2,7 @@ import Block from './Block.astro';
 
 export const meta = {
   slug: 'MessagesMarquee',
-  order: 7,
+  order: 8,
   enabled: true
 };
 

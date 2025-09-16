@@ -2,7 +2,7 @@ import Block from './Block.astro';
 
 export const meta = {
   slug: 'Footer',
-  order: 8,
+  order: 9,
   enabled: true
 };
 
