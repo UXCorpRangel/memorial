@@ -1,21 +1,22 @@
 ---
-import { cardsData } from './data.js';
+import GlowCard from "@/components/GlowCard.astro";
+import { cardsData } from "./data.js";
 ---
 
 <section class="py-12 lg:pt-20 lg:pb-48 max-w-screen-2xl mx-auto">
   <div>
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      {cardsData.cards.map((card) => (
-        <article
-          class="bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] p-10"
-        >
-          <div class="space-y-4 flex-grow">
-            <p class="text-white leading-relaxed text-[20px]">
-              {card}
-            </p>
-          </div>
-        </article>
-      ))}
+      {
+        cardsData.cards.map((card) => (
+          <GlowCard class="p-10">
+            <article>
+              <div class="space-y-4 flex-grow">
+                <p class="text-white leading-relaxed text-[20px]">{card}</p>
+              </div>
+            </article>
+          </GlowCard>
+        ))
+      }
     </div>
   </div>
 </section>
