@@ -6,60 +6,34 @@ import { countdownData } from "./data.js";
 <section class="flex flex-col items-center justify-center gap-6 py-12 lg:py-48">
   <img src="tyto_and_sandy.png" alt="tyto_and_sandy" class="w-auto h-[180px]" />
   <div class="flex flex-row flex-wrap gap-4 justify-center items-center">
-    <section class="flex flex-col gap-4 items-center justify-center">
-      <figure
-        class="w-[80px] h-[80px] lg:h-[122px] lg:w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
-      >
-        <p
-          id="countdown_days"
-          class="text-[32px] lg:text-[64px] font-[500] text-white"
-        >
-        </p>
-      </figure>
-      <span class="text-[16px] text-white font-[400]">Dias</span>
-    </section>
-    <section class="flex flex-col gap-4 items-center justify-center">
-      <figure
-        class="w-[80px] h-[80px] lg:h-[122px] lg:w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
-      >
-        <p
-          id="countdown_hours"
-          class="text-[32px] lg:text-[64px] font-[500] text-white"
-        >
-        </p>
-      </figure>
-      <span class="text-[16px] text-white font-[400]">Horas</span>
-    </section>
-    <section class="flex flex-col gap-4 items-center justify-center">
-      <figure
-        class="w-[80px] h-[80px] lg:h-[122px] lg:w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
-      >
-        <p
-          id="countdown_min"
-          class="text-[32px] lg:text-[64px] font-[500] text-white"
-        >
-        </p>
-      </figure>
-      <span class="text-[16px] text-white font-[400]">Min</span>
-    </section>
-    <section class="flex flex-col gap-4 items-center justify-center">
-      <figure
-        class="w-[80px] h-[80px] lg:h-[122px] lg:w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
-      >
-        <p
-          id="countdown_seg"
-          class="text-[32px] lg:text-[64px] font-[500] text-white"
-        >
-        </p>
-      </figure>
-      <span class="text-[16px] text-white font-[400]">Seg</span>
-    </section>
+    {
+      [
+        { slug: "days", label: "Dias" },
+        { slug: "hours", label: "Horas" },
+        { slug: "min", label: "Min" },
+        { slug: "seg", label: "Seg" },
+      ].map((e) => {
+        return (
+          <section class="flex flex-col gap-4 items-center justify-center">
+            <figure class="w-[60px] h-[60px] md:w-[80px] md:h-[80px] lg:h-[122px] lg:w-[110px] border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center">
+              <p
+                id={`countdown_${e.slug}`}
+                class="text-[24px] md:text-[32px] lg:text-[64px] font-[500] text-white"
+              />
+            </figure>
+            <span class="text-[16px] text-white font-[400]">{e.label}</span>
+          </section>
+        );
+      })
+    }
   </div>
-  <p class="text-white font-bold text-center text-[24px] lg:text-[48px]">
+  <p
+    class="text-[20px] md:text-[26px] lg:text-[32px] text-white font-bold text-center"
+  >
     {countdownData.title}
   </p>
   <p
-    class="text-center font-[400] text-white text-[14px] lg:text-[18px] leading-relaxed whitespace-pre-line"
+    class="text-[14px] lg:text-[1rem] text-center font-[400] text-white leading-relaxed whitespace-pre-line"
   >
     {countdownData.description}
   </p>
