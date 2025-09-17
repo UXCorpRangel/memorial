@@ -81,8 +81,9 @@ export interface CustomClaims2 {
 }
 
 async function getUser() {
+  const url = window.origin;
   try {
-    const response = await fetch("http://localhost:4321/api/user");
+    const response = await fetch(`${url}/api/user`);
     const user = (await response.json()) as User;
     if (user) {
       return user;

@@ -10,3 +10,16 @@ const sections = getResolvedSections();
     {sections.map(({ Component, props }) => <Component {...props} />)}
   </main>
 </BaseLayout>
+
+<script>
+  import { getUser } from "@/client/user.client";
+  try {
+    const user = await getUser();
+    if (user) {
+      localStorage.setItem("user", JSON.stringify(user));
+    }
+  } catch (error) {
+    console.error("error: ", error);
+    localStorage.removeItem("user");
+  }
+</script>

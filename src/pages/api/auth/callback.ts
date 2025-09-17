@@ -5,7 +5,7 @@ export const GET: APIRoute = async ({ url, cookies, redirect }) => {
   const authCode = url.searchParams.get("code");
 
   if (!authCode) {
-    return new Response("No se proporcionó ningún código", { status: 400 });
+    return new Response("No authorization code found", { status: 400 });
   }
 
   const { data, error } = await supabase.auth.exchangeCodeForSession(authCode);
@@ -14,14 +14,40 @@ export const GET: APIRoute = async ({ url, cookies, redirect }) => {
     return new Response(error.message, { status: 500 });
   }
 
-  const { access_token, refresh_token } = data.session;
+  if (data.session && data.user) {
+    // Configuración de cookies para desarrollo local
+    const isProduction = process.env.NODE_ENV === 'production';
+    
+    cookies.set("sb-access-token", data.session.access_token, {
+      path: "/",
+      httpOnly: true,
+      secure: isProduction, // Solo secure en producción
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7, // 7 días
+    });
+    
+    cookies.set("sb-refresh-token", data.session.refresh_token, {
+      path: "/",
+      httpOnly: true,
+      secure: isProduction, // Solo secure en producción
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 30, // 30 días
+    });
 
-  cookies.set("sb-access-token", access_token, {
-    path: "/",
-  });
-  cookies.set("sb-refresh-token", refresh_token, {
-    path: "/",
-  });
+    // Guardar información del usuario en una cookie accesible desde el cliente
+    cookies.set("user-data", JSON.stringify({
+      id: data.user.id,
+      email: data.user.email,
+      user_metadata: data.user.user_metadata,
+      app_metadata: data.user.app_metadata,
+    }), {
+      path: "/",
+      httpOnly: false, // Accesible desde JavaScript
+      secure: isProduction,
+      sameSite: "lax",
+      maxAge: 60 * 60 * 24 * 7, // 7 días
+    });
+  }
 
   return redirect("/");
 };

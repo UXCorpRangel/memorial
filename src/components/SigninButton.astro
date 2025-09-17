@@ -1,29 +1,21 @@
----
-import Button from "@/components/Button.astro";
-import { getUser } from "@/client/user.client";
+<div class="flex items-center gap-2" data-state="signin" id="signin-button">
+</div>
 
-const userSession = await getUser();
----
-<form action="/api/auth/signin" method="post" class="absolute right-0">
-    {
-      userSession.error ? (
-        <Button
-            variant="twitch"
-            size="small"
-            value="twitch"
-            name="provider"
-            type="submit"
-          >
-          <svg fill="#ffffff" width="24" height="24" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg">
-            <path d="M26.711 14.929l-4.284 4.284h-4.285l-3.749 3.749v-3.749h-4.82v-16.067h17.138zM8.502 1.004l-5.356 5.356v19.279h6.427v5.356l5.356-5.356h4.284l9.641-9.64v-14.996zM21.356 6.895h2.142v6.427h-2.142zM15.464 6.895h2.143v6.427h-2.144z"></path>
-          </svg>
-            Inicia sesión con Twitch
-      </Button>
-      ) : (
-        <div class="flex items-center gap-2">
-          <img src={userSession.user_metadata.avatar_url} alt={userSession.user_metadata.full_name} class="rounded-full w-8 h-8" />
-          <p class="text-white">{userSession.user_metadata.full_name}</p>
-        </div>
-      )
+<script>
+  const user = JSON.parse(localStorage.getItem("user") || "null");
+  if (user) {
+    const signinButton = document.getElementById("signin-button");
+    if (signinButton) {
+      signinButton.innerHTML = `
+      <div class="flex items-center gap-2">
+        <img
+          src=${user?.user_metadata?.avatar_url || ""}
+          alt=${user?.user_metadata?.full_name || ""}
+          class="rounded-full w-8 h-8"
+        />
+        <p class="text-white">${user?.user_metadata?.full_name || ""}</p>
+      </div>
+      `;
     }
-  </form>
+  }
+</script>

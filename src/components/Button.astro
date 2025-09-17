@@ -9,7 +9,7 @@ const { variant, size = "large", ...rest } = Astro.props;
 <button
   {...rest}
   class:list={[
-    "relative items-center font-semibold text-white hover:outline outline-offset-0 hover:outline-offset-4 transition-all duration-100 before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white/.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:[transition:background-position_0s_ease] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1000ms]",
+    "relative items-center w-fit font-semibold text-white hover:outline outline-offset-0 hover:outline-offset-4 transition-all duration-100 before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white/.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:[transition:background-position_0s_ease] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1000ms]",
     {
       "bg-[linear-gradient(90deg,#F3384A_0%,#972123_100%)] hover:bg-[linear-gradient(90deg,#972123_0%,#F3384A_100%)] outline-primary":
         variant === "primary",
