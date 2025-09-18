@@ -21,7 +21,7 @@ const { works } = Astro.props;
     {
       works.projects.map((project, index) => (
         <button
-          class={`flex-none min-w-[285px] max-w-[285px] tab-button text-center p-4 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#972123] ${
+          class={`flex-none min-w-[285px] max-w-[285px] tab-button-works text-center p-4 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-[#972123] ${
             index === 0
               ? "border-[2.43px] border-solid [border-image:linear-gradient(90deg,#F3384A_0%,#972123_100%)_1] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,#432733_0%,#22202E_100%)]"
               : "border-[0.81px] border-solid border-[#383848] bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]"
@@ -133,7 +133,7 @@ const { works } = Astro.props;
 
     constructor() {
       this.tabs = Array.from(
-        document.querySelectorAll(".tab-button")
+        document.querySelectorAll(".tab-button-works")
       ) as HTMLElement[];
       this.panels = Array.from(
         document.querySelectorAll(".tab-panel")
