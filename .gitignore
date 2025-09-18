@@ -26,4 +26,3 @@ bun.lock
 package-lock.json
 yarn.lock
 pnpm-lock.json
-pnpm-lock.yaml
