@@ -24,7 +24,24 @@ import Button from "@/components/Button.astro";
       seguimos compartiendo con él. 🌟
     </p>
 
+    <!-- Mensaje para usuarios no logueados -->
+    <div id="login-required" class="hidden w-full lg:max-w-3xl text-center space-y-6">
+      <div class="bg-yellow-900/30 border border-yellow-500 rounded-lg p-6">
+        <h2 class="text-yellow-400 text-xl font-semibold mb-2">
+          Inicia sesión para dejar tu mensaje
+        </h2>
+        <p class="text-white text-lg mb-4">
+          Para poder dejar un mensaje de recuerdo para Tyto, necesitas iniciar sesión en tu cuenta.
+        </p>
+        <Button variant="primary" size="large" id="login-redirect">
+          Iniciar Sesión
+        </Button>
+      </div>
+    </div>
+
+    <!-- Formulario para usuarios logueados -->
     <form
+      id="message-form"
       action="/api/message"
       method="POST"
       class="w-full lg:max-w-3xl space-y-4 lg:space-y-12"
@@ -42,17 +59,26 @@ import Button from "@/components/Button.astro";
         />
       </div>
       <div class="grid lg:grid-cols-2">
-        <label for="message" class="text-white text-xl">Mensaje</label>
-        <textarea
-          id="message"
-          name="message"
-          rows="4"
-          class="text-white bg-background-default border border-white p-2"
-        ></textarea>
+        <label for="message" class="text-white text-xl">
+          Mensaje <span class="text-sm text-gray-400">(máx. 300 caracteres)</span>
+        </label>
+        <div class="space-y-2">
+          <textarea
+            id="message"
+            name="message"
+            rows="4"
+            maxlength="300"
+            class="text-white bg-background-default border border-white p-2 w-full"
+            placeholder="Escribe tu mensaje de recuerdo para Tyto..."
+          ></textarea>
+          <div class="text-right">
+            <span id="char-count" class="text-sm text-gray-400">0/300</span>
+          </div>
+        </div>
       </div>
       <div class="flex justify-center gap-10">
         <Button variant="primary" size="large" type="submit">Enviar</Button>
-        <Button variant="secondary" size="large" type="submit" id="back-home"
+        <Button variant="secondary" size="large" type="button" id="back-home"
           >Volver al home</Button
         >
       </div>
@@ -61,9 +87,146 @@ import Button from "@/components/Button.astro";
 </BaseLayout>
 
 <script>
-  const backHomeButton = document.getElementById("back-home");
-  backHomeButton.addEventListener("click", (e) => {
-    e.preventDefault();
-    window.location.href = "/";
+  // Función para obtener datos del usuario desde localStorage
+  function getUser() {
+    try {
+      const userSession = localStorage.getItem("user-session");
+      if (userSession) {
+        return JSON.parse(userSession);
+      }
+      return null;
+    } catch (error) {
+      console.error("Error parsing user session:", error);
+      return null;
+    }
+  }
+
+  // Función para obtener cookie
+  function getCookie(name: string): string | null {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) {
+      return parts.pop()?.split(';').shift() || null;
+    }
+    return null;
+  }
+
+  // Validar sesión del usuario
+  function validateUserSession(): boolean {
+    const user = getUser();
+    const userDataCookie = getCookie('user-data');
+    
+    return !!(user || userDataCookie);
+  }
+
+  // Inicializar la página
+  function initializePage(): void {
+    const isLoggedIn = validateUserSession();
+    const messageForm = document.getElementById("message-form") as HTMLFormElement | null;
+    const loginRequired = document.getElementById("login-required") as HTMLElement | null;
+    const loginRedirectButton = document.getElementById("login-redirect") as HTMLButtonElement | null;
+    const backHomeButton = document.getElementById("back-home") as HTMLButtonElement | null;
+    const messageTextarea = document.getElementById("message") as HTMLTextAreaElement | null;
+    const charCount = document.getElementById("char-count") as HTMLSpanElement | null;
+
+    if (isLoggedIn) {
+      // Usuario logueado: mostrar formulario
+      messageForm?.classList.remove("hidden");
+      loginRequired?.classList.add("hidden");
+      
+      // Prellenar el nombre si está disponible
+      const user = getUser();
+      const fullNameInput = document.getElementById("fullname") as HTMLInputElement | null;
+      if (user && fullNameInput) {
+        fullNameInput.value = user.user_metadata?.full_name || user.email || "";
+      }
+    } else {
+      // Usuario no logueado: mostrar mensaje de login
+      messageForm?.classList.add("hidden");
+      loginRequired?.classList.remove("hidden");
+    }
+
+    // Event listener para el botón de login
+    if (loginRedirectButton) {
+      loginRedirectButton.addEventListener("click", () => {
+        // Buscar el modal del header y abrirlo
+        const modalOverlay = document.getElementById("modal-overlay") as HTMLDialogElement | null;
+        if (modalOverlay) {
+          // Asegurar que esté en el tab de signin
+          const signinTab = document.getElementById("signin-tab") as HTMLButtonElement | null;
+          if (signinTab) {
+            signinTab.click();
+          }
+          modalOverlay.showModal();
+        } else {
+          // Fallback si no encuentra el modal
+          window.location.href = "/?mode=signin";
+        }
+      });
+    }
+
+    // Event listener para el botón de volver al home
+    if (backHomeButton) {
+      backHomeButton.addEventListener("click", (e) => {
+        e.preventDefault();
+        window.location.href = "/";
+      });
+    }
+
+    // Contador de caracteres para el mensaje
+    if (messageTextarea && charCount) {
+      messageTextarea.addEventListener("input", () => {
+        const currentLength = messageTextarea.value.length;
+        charCount.textContent = `${currentLength}/300`;
+        
+        // Cambiar color si se acerca al límite
+        if (currentLength > 250) {
+          charCount.classList.add("text-yellow-400");
+          charCount.classList.remove("text-gray-400");
+        } else {
+          charCount.classList.add("text-gray-400");
+          charCount.classList.remove("text-yellow-400");
+        }
+      });
+    }
+
+    // Validación del formulario antes de enviar
+    if (messageForm) {
+      messageForm.addEventListener("submit", (e) => {
+        if (!validateUserSession()) {
+          e.preventDefault();
+          alert("Debes iniciar sesión para enviar un mensaje.");
+          window.location.href = "/?mode=signin";
+          return;
+        }
+
+        const messageValue = messageTextarea?.value.trim();
+        if (!messageValue) {
+          e.preventDefault();
+          alert("Por favor, escribe un mensaje antes de enviar.");
+          return;
+        }
+
+        if (messageValue.length > 300) {
+          e.preventDefault();
+          alert("El mensaje no puede exceder los 300 caracteres.");
+          return;
+        }
+      });
+    }
+  }
+
+  // Inicializar cuando el DOM esté listo
+  document.addEventListener("DOMContentLoaded", initializePage);
+
+  // Reinicializar si el usuario cambia (por ejemplo, si inicia sesión en otra pestaña)
+  window.addEventListener("focus", () => {
+    const currentState = validateUserSession();
+    const formVisible = !document.getElementById("message-form")?.classList.contains("hidden");
+    
+    // Si el estado de login cambió, reinicializar
+    if (currentState !== formVisible) {
+      initializePage();
+    }
   });
 </script>
