@@ -7,10 +7,9 @@ import Button from "@/components/Button.astro";
   class="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_50%_60%_at_50%_0%,#491012_0%,#07091E_100%)]"
 >
 </div>
-<header class="w-full flex justify-between items-center py-6">
-  <div class="hidden lg:flex"></div>
+<header class="flex justify-between items-center lg:relative w-full py-6">
   <div
-    class="flex justify-center items-center text-white cursor-pointer gap-2 group tyto-logo-hover-svg lg:scale-150"
+    class="lg:absolute lg:inset-x-0 top-6 flex justify-center items-center text-white cursor-pointer gap-2 group tyto-logo-hover-svg lg:scale-150"
   >
     <span
       class="font-bebas font-[600] text-[1.5rem] transition group-hover:text-hover-primary"
@@ -33,7 +32,7 @@ import Button from "@/components/Button.astro";
       >Gutiérrez
     </span>
   </div>
-  <div id="signin-button">
+  <div class="lg:absolute right-0 top-6" id="signin-button">
     <button class="text-white" id="signin-trigger">
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -574,8 +573,9 @@ import Button from "@/components/Button.astro";
         signinButton.innerHTML = `
           <div class="flex items-center gap-2">
             <span class="text-white text-sm">${user.user_metadata?.full_name || user.email}</span>
-            <button id="logout-button" class="text-red-400 hover:text-red-300 text-sm">
-              Cerrar Sesión
+            <button id="logout-button" class="flex items-center gap-2 text-red-400 hover:text-red-300 text-sm">
+              <span class="hidden lg:flex">Cerrar Sesión</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
             </button>
           </div>
         `;
