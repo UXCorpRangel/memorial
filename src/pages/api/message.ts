@@ -21,3 +21,13 @@ export const POST: APIRoute = async ({ request, redirect }) => {
 
   return redirect("/");
 };
+
+export const GET: APIRoute = async ({ request }) => {
+  const { data, error } = await supabase.from("messages").select("*");
+
+  if (error) {
+    return new Response(error.message, { status: 500 });
+  }
+
+  return new Response(JSON.stringify(data), { status: 200 });
+};

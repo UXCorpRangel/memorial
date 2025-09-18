@@ -29,14 +29,24 @@
          shadow-[0px_-2px_53.8px_17px_rgba(251,215,5,0.2)];
 }
 
-.article:hover::before { @apply opacity-0; }
-.article:hover::after  { @apply opacity-100; }
+.article:hover::before {
+  @apply opacity-0;
+}
+.article:hover::after {
+  @apply opacity-100;
+}
 
-.article > * { @apply relative z-10; }
+.article > * {
+  @apply relative z-10;
+}
 
 @keyframes coin-spin {
-  from { transform: rotateY(0deg); }
-  to   { transform: rotateY(360deg); }
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
 }
 
 .group:hover .coin {
@@ -46,14 +56,18 @@
 
 .slider {
   -webkit-mask: linear-gradient(90deg, #0000, #000 5% 95%, #0000);
-          mask: linear-gradient(90deg, #0000, #000 5% 95%, #0000);
+  mask: linear-gradient(90deg, #0000, #000 5% 95%, #0000);
 }
 
 .slides {
-  animation: slider-left 40s linear infinite;
+  animation: slider-left 120s linear infinite;
 }
-.slides:hover { animation-play-state: paused; }
+.slides:hover {
+  animation-play-state: paused;
+}
 
 @keyframes slider-left {
-   100% { transform: translateX(-50%); }
+  100% {
+    transform: translateX(-50%);
+  }
 }

@@ -1,35 +1,24 @@
 ---
-import { messagesData } from './data.js';
-import './styles.css';
+import { messagesData } from "./data.js";
+import "./styles.css";
 
 const items = messagesData.messages ?? [];
 
 const loopItems = [...items, ...items];
-
 ---
 
-<section class="px-4 sm:px-6 lg:px-8 max-w-screen-2xl mx-auto pt-12 lg:pt-32 lg:pb-48">
-  <h2 class="text-5xl font-bold text-neutral-100 text-left">Mensajes y dedicatoria</h2>
+<section
+  class="px-4 sm:px-6 lg:px-8 max-w-screen-2xl mx-auto pt-12 lg:pt-32 lg:pb-48"
+>
+  <h2 class="text-5xl font-bold text-neutral-100 text-left">
+    Mensajes y dedicatoria
+  </h2>
 
   <div class="overflow-x-hidden mask-gradient-lr pt-20 pb-20 slider">
-    <div class="slides flex flex-nowrap gap-[30px] w-[max-content] will-change-transform">
-      {loopItems.map((m, i) => (
-        <article
-          class="article group flex-none w-[484px]"
-          aria-hidden={i >= items.length}
-          id="messages"
-        >
-          <div class="space-y-4">
-            <img src={messagesData.icon} alt="" class="coin transform-gpu group-hover:animate-coin-jump" />
-            <p class="text-white leading-relaxed">"{m.text}"</p>
-            <p class="mt-4">
-              <strong class="text-white font-semibold text-lg">{m.author}</strong>
-              {" "}-{" "}
-              <span class="text-white/90 text-sm">{m.date}</span>
-            </p>
-          </div>
-        </article>
-      ))}
+    <div
+      class="slides flex flex-nowrap gap-[30px] w-[max-content] will-change-transform"
+      id="messages-container"
+    >
     </div>
   </div>
 </section>
@@ -37,6 +26,62 @@ const loopItems = [...items, ...items];
 <audio id="coin-sound" src={messagesData.sounds.coin} preload="auto"></audio>
 
 <script>
+  export interface Message {
+    id: number;
+    created_at: string;
+    fullName: string;
+    message: string;
+  }
+
+  async function fetchMessages(): Promise<Message[] | null> {
+    try {
+      const url = window.origin;
+      const response = await fetch(`${url}/api/message`);
+      const messages = (await response.json()) as Message[];
+      if (messages) {
+        return messages;
+      }
+      return null;
+    } catch (error) {
+      console.error("error: ", error);
+      return null;
+    }
+  }
+
+  const messages = await fetchMessages();
+
+  const messagesContainer = document.querySelector("#messages-container");
+
+  if (messages && messages.length > 0) {
+    messages.forEach((m: Message) => {
+      const article = document.createElement("article");
+      article.innerHTML = `
+       <article
+            class="article group flex-none w-[484px]"
+            id="messages"
+          >
+            <div class="flex flex-col gap-4 justify-between h-full">
+              <div class="flex flex-col gap-4">
+                <img
+                src="/coin.svg"
+                alt=""
+                class="w-20 coin transform-gpu group-hover:animate-coin-jump"
+              />
+              <p class="text-white leading-relaxed line-clamp-4">"${m.message}"</p>
+                </div>
+              <p>
+                <strong class="text-white font-semibold text-lg">
+                  ${m.fullName}
+                </strong>
+                <span class="text-white/90 text-sm">${new Date(m.created_at).toLocaleDateString()}</span>
+              </p>
+            </div>
+          </article>
+    `;
+      messagesContainer?.appendChild(article);
+    });
+  }
+
   const articles = document.querySelectorAll("#messages");
   const audioEl = document.querySelector("#coin-sound");
 
@@ -51,7 +96,7 @@ const loopItems = [...items, ...items];
           audioEl.currentTime = 0;
           audioUnlocked = true;
         }).catch(() => {
-          console.log('audio bloqueado -_-')
+          console.log("audio bloqueado -_-");
         });
       }
     }
@@ -59,22 +104,32 @@ const loopItems = [...items, ...items];
     window.removeEventListener("touchstart", unlockOnce);
     window.removeEventListener("keydown", unlockOnce);
   }
-  window.addEventListener("pointerdown", unlockOnce, { once: true, passive: true });
-  window.addEventListener("touchstart", unlockOnce, { once: true, passive: true });
+  window.addEventListener("pointerdown", unlockOnce, {
+    once: true,
+    passive: true,
+  });
+  window.addEventListener("touchstart", unlockOnce, {
+    once: true,
+    passive: true,
+  });
   window.addEventListener("keydown", unlockOnce, { once: true });
 
   articles.forEach((a) => {
-    a.addEventListener("pointerenter", () => {
-      if (!(audioEl instanceof HTMLAudioElement)) return;
-      if (!audioUnlocked) return;
+    a.addEventListener(
+      "pointerenter",
+      () => {
+        if (!(audioEl instanceof HTMLAudioElement)) return;
+        if (!audioUnlocked) return;
 
-      const ch = audioEl.cloneNode(true);
-      if (ch instanceof HTMLAudioElement) {
-        ch.volume = audioEl.volume;
-        ch.play().catch(() => {});
-        ch.addEventListener("ended", () => ch.remove());
-        document.body.appendChild(ch);
-      }
-    }, { passive: true });
+        const ch = audioEl.cloneNode(true);
+        if (ch instanceof HTMLAudioElement) {
+          ch.volume = audioEl.volume;
+          ch.play().catch(() => {});
+          ch.addEventListener("ended", () => ch.remove());
+          document.body.appendChild(ch);
+        }
+      },
+      { passive: true }
+    );
   });
 </script>
