@@ -2,13 +2,12 @@
 import { bannerData } from './data.js';
 ---
 
-<section class="w-full py-12 lg:py-32 max-w-screen-2xl mx-auto">
-  <div>
-    <div class="flex flex-col lg:flex-row gap-8 px-8 py-8 bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]">
+<section class="w-full  lg:py-32 max-w-screen-2xl mx-auto">
+    <div class="grid grid-cols-1 lg:p-8  lg:grid-cols-[450px_1fr] gap-8 bg-[radial-gradient(135.68%_278.42%_at_8.47%_26.88%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)]">
       <!-- Slider de imágenes -->
        <section class="flex flex-col relative items-center gap-4">
          <div class="relative">
-           <div class="slider-container overflow-hidden w-[450px]">
+           <div class="slider-container flex max-h-[450px] overflow-hidden w-full">
              <div class="slider-track flex transition-transform duration-500 ease-in-out" id="banner-slider">
                {bannerData.images.map((image, index) => (
                  <div class="slider-slide flex-none w-full">
@@ -16,7 +15,7 @@ import { bannerData } from './data.js';
                      src={image.src}
                      alt={image.alt}
                      loading="lazy"
-                     class="w-[450px] h-[450px] object-cover select-none pointer-events-none"
+                     class="w-full h-full object-cover object-center select-none pointer-events-none"
                    />
                  </div>
                ))}
@@ -37,7 +36,7 @@ import { bannerData } from './data.js';
          </div>
        </section>
 
-      <div class="space-y-6  w-full flex flex-col justify-center pl-8">
+      <section class="space-y-6  w-full flex flex-col justify-center p-4">
         <div class="space-y-4">
           <h2 class="text-[32px] font-bold text-white">
             {bannerData.title}
@@ -46,9 +45,8 @@ import { bannerData } from './data.js';
             {bannerData.description}
           </p>
         </div>
-      </div>
+      </section>
     </div>
-  </div>
 </section>
 
 <script>
