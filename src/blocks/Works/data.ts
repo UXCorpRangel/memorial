@@ -19,21 +19,21 @@ export const worksData: WorksData = {
     },
 
     {
-      title: "Trading Card",
+      title: "Animación de ondas",
       type: "preview",
-      url: "https://codepen.io/jagcruz/pen/xxNdRWr",
+      url: "https://codepen.io/jagcruz/pen/emObbJd",
       zoom: 0.5,
     },
     {
-      title: "Card Web",
+      title: "Borde animado en carta",
       type: "preview",
-      url: "https://codepen.io/jagcruz/pen/bGPXevR",
+      url: "https://codepen.io/jagcruz/pen/MWNKLoQ",
       zoom: 1,
     },
     {
-      title: "Holographic  Card",
+      title: "Batería animada",
       type: "preview",
-      url: "https://codepen.io/jagcruz/pen/JjqzGPG",
+      url: "https://codepen.io/jagcruz/pen/RwOevEX",
       zoom: 1,
     },
 
