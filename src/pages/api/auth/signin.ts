@@ -16,7 +16,7 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
         provider: provider as Provider,
         options: {
           redirectTo: `${
-            import.meta.env.SITE || "http://localhost:4321"
+            import.meta.env.PUBLIC_SITE || "http://localhost:4321"
           }/api/auth/callback`,
         },
       });
