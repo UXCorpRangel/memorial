@@ -1,10 +1,13 @@
 export interface LandingConfig {
   autoDiscover: boolean;
   order: string[];
-  overrides: Record<string, {
-    enabled?: boolean;
-    props?: Record<string, unknown>;
-  }>;
+  overrides: Record<
+    string,
+    {
+      enabled?: boolean;
+      props?: Record<string, unknown>;
+    }
+  >;
 }
 
 const config: LandingConfig = {
@@ -15,19 +18,20 @@ const config: LandingConfig = {
     "Countdown",
     "Banner",
     "Works",
+    "Gallery",
     "Donations",
     "CardsGrid",
     "MessagesMarquee",
-    "Footer"
+    "Footer",
   ],
   overrides: {
     Hero: {
       enabled: true,
       props: {
-        title: "Memorial Landing Page"
-      }
-    }
-  }
+        title: "Memorial Landing Page",
+      },
+    },
+  },
 };
 
 export default config;

@@ -1,9 +1,9 @@
-import Block from './Block.astro';
+import Block from "./Block.astro";
 
 export const meta = {
-  slug: 'Donations',
-  order: 6,
-  enabled: true
+  slug: "Donations",
+  order: 7,
+  enabled: true,
 };
 
 export default Block;

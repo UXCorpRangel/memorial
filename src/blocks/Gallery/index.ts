@@ -1,8 +1,8 @@
 import Block from "./Block.astro";
 
 export const meta = {
-  slug: "CardsGrid",
-  order: 8,
+  slug: "Gallery",
+  order: 6,
   enabled: true,
 };
 
