@@ -50,7 +50,9 @@ import { countdownData } from "./data.js";
       <p id="next_hour" class="text-white"></p>
     </div>
   </div>
-  <Button id="codepen" variant="secondary">Ver agenda</Button>
+  <Button id="button_hero_agenda_countdown" variant="secondary">
+    Ver agenda</Button
+  >
 </section>
 
 <script>
@@ -124,4 +126,11 @@ import { countdownData } from "./data.js";
 
   const intervalId = setInterval(updateCountdown, 1000);
   updateCountdown();
+
+  const button_countdown_agenda = document.querySelector(
+    "#button_hero_agenda_countdown"
+  );
+  button_countdown_agenda?.addEventListener?.("click", () => {
+    window.location.href = "/agenda";
+  });
 </script>
