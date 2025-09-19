@@ -126,7 +126,7 @@ function convertChileTimeToWorldTimes(chileTimeString: string) {
         <div class="text-[28px] sm:text-[32px] max-sm:order-3 max-sm:col-start-2 text-left flex flex-wrap gap-3 items-start">
           {convertChileTimeToWorldTimes(speaker.time).map(({ time, flag }) => (
             <div class="flex items-start gap-2">
-              <span class="mr-2">{flag}</span>
+              <span class="font-noto_color_emoji mr-2">{flag}</span>
               <span>{time}</span>
             </div>
           ))}

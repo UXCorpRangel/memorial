@@ -7,6 +7,7 @@ export default {
         bebas: ['"Bebas Neue"', "sans-serif"],
         lato: ['"Lato"', "sans-serif"],
         jetbrains_mono: ['"JetBrains Mono"', "sans-serif"],
+        noto_color_emoji: ['"Noto Color Emoji"', "sans-serif"],
       },
       colors: {
         background: {
