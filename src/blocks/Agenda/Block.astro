@@ -88,7 +88,9 @@ function convertChileTimeToWorldTimes(chileTimeString: string) {
       Quiénes nos van a apoyar en esta causa ❤️
     </p>
     <div class="flex gap-6 sm:gap-10 flex-col sm:flex-row w-full items-center">
-      <Button variant="primary" disabled> Donar al Paypal </Button>
+      <Button variant="primary" id="button_agenda_donate">
+        Donar al Paypal
+      </Button>
       <Button id="back-to-home" variant="secondary">Volver al home</Button>
     </div>
   </div>
@@ -219,6 +221,14 @@ function convertChileTimeToWorldTimes(chileTimeString: string) {
   if (backToHomeButton) {
     backToHomeButton.addEventListener("click", () => {
       window.location.href = "/";
+    });
+  }
+
+  const donateButton = document.getElementById("button_agenda_donate");
+  if (donateButton) {
+    donateButton.addEventListener("click", () => {
+      window.location.href =
+        "https://www.paypal.com/donate/?hosted_button_id=KTHKXSAPCHEMW";
     });
   }
 

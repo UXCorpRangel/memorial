@@ -38,7 +38,9 @@ const { heading, subheading, description } = heroData;
     <div
       class="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mt-12"
     >
-      <Button variant="primary" disabled> Donar al Paypal </Button>
+      <Button variant="primary" id="button_hero_donate">
+        Donar al Paypal
+      </Button>
       <Button id="button_hero_agenda" variant="secondary"> Ver agenda</Button>
     </div>
   </div>
@@ -130,5 +132,11 @@ const { heading, subheading, description } = heroData;
   const button_hero_agenda = document.querySelector("#button_hero_agenda");
   button_hero_agenda?.addEventListener?.("click", () => {
     window.location.href = "/agenda";
+  });
+
+  const button_hero_donate = document.querySelector("#button_hero_donate");
+  button_hero_donate?.addEventListener?.("click", () => {
+    window.location.href =
+      "https://www.paypal.com/donate/?hosted_button_id=KTHKXSAPCHEMW";
   });
 </script>

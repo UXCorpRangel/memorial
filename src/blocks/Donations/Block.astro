@@ -27,8 +27,20 @@ import Button from "@components/Button.astro";
           </p>
         </div>
 
-        <Button variant="primary" disabled> Donar al Paypal </Button>
+        <Button variant="primary" id="button_donations_donate">
+          Donar al Paypal
+        </Button>
       </div>
     </div>
   </div>
 </section>
+
+<script>
+  const donateButton = document.getElementById("button_donations_donate");
+  if (donateButton) {
+    donateButton.addEventListener("click", () => {
+      window.location.href =
+        "https://www.paypal.com/donate/?hosted_button_id=KTHKXSAPCHEMW";
+    });
+  }
+</script>
