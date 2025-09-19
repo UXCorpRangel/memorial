@@ -9,14 +9,24 @@ export async function GET() {
   if (error) {
     return new Response(JSON.stringify({ error: error.message }), {
       status: 500,
+      headers: { "Content-Type": "application/json" },
     });
   }
 
   if (!user) {
-    return new Response(JSON.stringify({ message: "Not authenticated" }), {
-      status: 401,
-    });
+    return new Response(
+      JSON.stringify({
+        message: "Not authenticated",
+      }),
+      {
+        status: 401,
+        headers: { "Content-Type": "application/json" },
+      }
+    );
   }
 
-  return new Response(JSON.stringify(user), { status: 200 });
+  return new Response(JSON.stringify(user), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 }
