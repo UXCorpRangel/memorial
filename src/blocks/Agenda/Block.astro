@@ -1,0 +1,26 @@
+---
+import "./style.css";
+import Block from "../Header";
+import Button from "@/components/Button.astro";
+import Speaker from "./Speaker.astro";
+---
+
+<Block />
+<div class="lorem">
+  <h1>Agenda</h1>
+  <div class="justify-self-center">
+    <p class="text-white text-center">
+      Quienes nos van a apoyarnos en esta causa ❤️
+    </p>
+    <div class="flex gap-10">
+      <Button variant="primary"> Donar al Paypal </Button>
+      <Button id="codepen" variant="secondary">Volver al home</Button>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="timeline">
+    <Speaker />
+  </div>
+</div>
