@@ -89,7 +89,7 @@ function convertChileTimeToWorldTimes(chileTimeString: string) {
     </p>
     <div class="flex gap-6 sm:gap-10 flex-col sm:flex-row w-full items-center">
       <Button variant="primary"> Donar al Paypal </Button>
-      <Button id="codepen" variant="secondary">Volver al home</Button>
+      <Button id="back-to-home" variant="secondary">Volver al home</Button>
     </div>
   </div>
 </div>
@@ -199,6 +199,13 @@ function convertChileTimeToWorldTimes(chileTimeString: string) {
 
 <script>
   import { scroll } from "motion";
+
+  const backToHomeButton = document.getElementById("back-to-home");
+  if (backToHomeButton) {
+    backToHomeButton.addEventListener("click", () => {
+      window.location.href = "/";
+    });
+  }
 
   document.addEventListener("DOMContentLoaded", () => {
     const timeline = document.getElementById("agenda-timeline");

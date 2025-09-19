@@ -8,7 +8,7 @@ export const heroData = {
       src: "/Tyto-portrait.webp",
       alt: "Imagen memorial 1",
       title: "Jaime Gutierrez 1993-2025",
-      position: "lg:bottom-0 lg:translate-x-1/2 lg:-rotate-[8deg] lg:z-20",
+      position: "lg:-bottom-10 lg:translate-x-1/2 lg:-rotate-[8deg] lg:z-20",
       showStars: false,
     },
     {
@@ -22,7 +22,7 @@ export const heroData = {
       src: "/Sandy-portrait.webp",
       alt: "Imagen memorial 3",
       title: "Sandy aprobadora de PR’s",
-      position: "lg:right-0 lg:-translate-y-1/2 lg:rotate-[18deg] lg:z-10",
+      position: "lg:right-16 lg:-translate-y-1/2 lg:rotate-[18deg] lg:z-10",
       showStars: true,
     },
   ],

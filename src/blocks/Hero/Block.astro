@@ -42,12 +42,12 @@ const { heading, subheading, description } = heroData;
       <Button id="button_hero_agenda" variant="secondary"> Ver agenda</Button>
     </div>
   </div>
-  <div class="flex-1 relative space-y-4 h-full">
+  <div class="flex-1 relative space-y-4">
     {
       heroData.images.map((image, index) => (
         <div
           class={
-            "relative w-fit bg-white/10 backdrop-blur px-4 py-6 border border-gray-800/20 lg:absolute hover:rotate-0 hover:scale-105 lg:hover:scale-125 transition-all duration-150 hover:z-50 brightness-90 hover:brightness-100 " +
+            "relative flex flex-col w-fit h-[480px] aspect-[10/16] bg-white/10 backdrop-blur px-4 py-6 border border-gray-800/20 lg:absolute hover:rotate-0 hover:scale-105 lg:hover:scale-125 transition-all duration-150 hover:z-50 brightness-90 hover:brightness-100 " +
             image.position
           }
         >
@@ -112,11 +112,9 @@ const { heading, subheading, description } = heroData;
           <img
             src={image.src}
             alt={image.alt}
-            width="300"
-            height="300"
-            class="object-cover"
+            class="w-full h-full object-cover aspect-auto"
           />
-          <p class="text-white mt-6 text-center">{image.title}</p>
+          <p class="text-white pt-6 text-center">{image.title}</p>
         </div>
       ))
     }
