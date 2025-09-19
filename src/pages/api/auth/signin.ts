@@ -1,6 +1,6 @@
+import type { Provider } from "@supabase/supabase-js";
 import type { APIRoute } from "astro";
 import { supabase } from "../../../lib/supabase";
-import type { Provider } from "@supabase/supabase-js";
 
 export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   const formData = await request.formData();
@@ -22,22 +22,32 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
       });
 
       if (error) {
-        return new Response(error.message, { status: 500 });
+        return new Response(error.message, {
+          status: 500,
+          headers: { "Content-Type": "application/json" },
+        });
       }
 
       return redirect(data.url);
     }
 
-    return new Response("Proveedor no válido", { status: 400 });
+    return new Response("Proveedor no válido", {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   if (!email || !password) {
-    return new Response("Email y contraseña son requeridos", { status: 400 });
+    return new Response("Email y contraseña son requeridos", {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   if (email.trim().length === 0 || password.trim().length === 0) {
     return new Response("Email y contraseña no pueden estar vacíos", {
       status: 400,
+      headers: { "Content-Type": "application/json" },
     });
   }
 
@@ -47,7 +57,10 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   });
 
   if (signInError) {
-    return new Response(signInError.message, { status: 500 });
+    return new Response(signInError.message, {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   if (data.session && data.user) {

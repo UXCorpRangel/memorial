@@ -7,7 +7,10 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   const message = formData.get("message")?.toString();
 
   if (!message) {
-    return new Response("Message is required", { status: 400 });
+    return new Response("Message is required", {
+      status: 400,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   const { data, error } = await supabase.from("messages").insert({
@@ -16,7 +19,10 @@ export const POST: APIRoute = async ({ request, redirect }) => {
   });
 
   if (error) {
-    return new Response(error.message, { status: 500 });
+    return new Response(error.message, {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
   return redirect("/");
@@ -26,8 +32,14 @@ export const GET: APIRoute = async ({ request }) => {
   const { data, error } = await supabase.from("messages").select("*");
 
   if (error) {
-    return new Response(error.message, { status: 500 });
+    return new Response(error.message, {
+      status: 500,
+      headers: { "Content-Type": "application/json" },
+    });
   }
 
-  return new Response(JSON.stringify(data), { status: 200 });
+  return new Response(JSON.stringify(data), {
+    status: 200,
+    headers: { "Content-Type": "application/json" },
+  });
 };
