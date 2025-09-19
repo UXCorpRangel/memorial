@@ -17,10 +17,10 @@ export async function GET() {
     return new Response(
       JSON.stringify({
         message: "Not authenticated",
-        headers: { "Content-Type": "application/json" },
       }),
       {
         status: 401,
+        headers: { "Content-Type": "application/json" },
       }
     );
   }
