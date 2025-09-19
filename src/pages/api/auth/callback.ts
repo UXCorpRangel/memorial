@@ -7,7 +7,6 @@ export const GET: APIRoute = async ({ url, cookies, redirect }) => {
   if (!authCode) {
     return new Response("No authorization code found", {
       status: 400,
-      headers: { "Content-Type": "application/json" },
     });
   }
 
@@ -16,7 +15,6 @@ export const GET: APIRoute = async ({ url, cookies, redirect }) => {
   if (error) {
     return new Response(error.message, {
       status: 500,
-      headers: { "Content-Type": "application/json" },
     });
   }
 

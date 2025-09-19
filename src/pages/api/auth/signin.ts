@@ -24,7 +24,6 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
       if (error) {
         return new Response(error.message, {
           status: 500,
-          headers: { "Content-Type": "application/json" },
         });
       }
 
@@ -33,21 +32,18 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
 
     return new Response("Proveedor no válido", {
       status: 400,
-      headers: { "Content-Type": "application/json" },
     });
   }
 
   if (!email || !password) {
     return new Response("Email y contraseña son requeridos", {
       status: 400,
-      headers: { "Content-Type": "application/json" },
     });
   }
 
   if (email.trim().length === 0 || password.trim().length === 0) {
     return new Response("Email y contraseña no pueden estar vacíos", {
       status: 400,
-      headers: { "Content-Type": "application/json" },
     });
   }
 
@@ -59,7 +55,6 @@ export const POST: APIRoute = async ({ request, cookies, redirect }) => {
   if (signInError) {
     return new Response(signInError.message, {
       status: 500,
-      headers: { "Content-Type": "application/json" },
     });
   }
 
