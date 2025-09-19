@@ -7,7 +7,7 @@ import Button from "@/components/Button.astro";
 
 <BaseLayout title="Memorial Landing">
   <Header />
-  <section class="flex flex-col items-center gap-12 max-w-5xl mx-auto">
+  <section class="flex flex-col items-center gap-12 max-w-5xl mx-auto mt-12">
     <Image
       src="/Sandy-congrats.webp"
       width={386}
@@ -25,13 +25,17 @@ import Button from "@/components/Button.astro";
     </p>
 
     <!-- Mensaje para usuarios no logueados -->
-    <div id="login-required" class="hidden w-full lg:max-w-3xl text-center space-y-6">
+    <div
+      id="login-required"
+      class="hidden w-full lg:max-w-3xl text-center space-y-6"
+    >
       <div class="bg-yellow-900/30 border border-yellow-500 rounded-lg p-6">
         <h2 class="text-yellow-400 text-xl font-semibold mb-2">
           Inicia sesión para dejar tu mensaje
         </h2>
         <p class="text-white text-lg mb-4">
-          Para poder dejar un mensaje de recuerdo para Tyto, necesitas iniciar sesión en tu cuenta.
+          Para poder dejar un mensaje de recuerdo para Tyto, necesitas iniciar
+          sesión en tu cuenta.
         </p>
         <Button variant="primary" size="large" id="login-redirect">
           Iniciar Sesión
@@ -60,7 +64,9 @@ import Button from "@/components/Button.astro";
       </div>
       <div class="grid lg:grid-cols-2">
         <label for="message" class="text-white text-xl">
-          Mensaje <span class="text-sm text-gray-400">(máx. 300 caracteres)</span>
+          Mensaje <span class="text-sm text-gray-400"
+            >(máx. 300 caracteres)</span
+          >
         </label>
         <div class="space-y-2">
           <textarea
@@ -106,7 +112,7 @@ import Button from "@/components/Button.astro";
     const value = `; ${document.cookie}`;
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) {
-      return parts.pop()?.split(';').shift() || null;
+      return parts.pop()?.split(";").shift() || null;
     }
     return null;
   }
@@ -114,29 +120,43 @@ import Button from "@/components/Button.astro";
   // Validar sesión del usuario
   function validateUserSession(): boolean {
     const user = getUser();
-    const userDataCookie = getCookie('user-data');
-    
+    const userDataCookie = getCookie("user-data");
+
     return !!(user || userDataCookie);
   }
 
   // Inicializar la página
   function initializePage(): void {
     const isLoggedIn = validateUserSession();
-    const messageForm = document.getElementById("message-form") as HTMLFormElement | null;
-    const loginRequired = document.getElementById("login-required") as HTMLElement | null;
-    const loginRedirectButton = document.getElementById("login-redirect") as HTMLButtonElement | null;
-    const backHomeButton = document.getElementById("back-home") as HTMLButtonElement | null;
-    const messageTextarea = document.getElementById("message") as HTMLTextAreaElement | null;
-    const charCount = document.getElementById("char-count") as HTMLSpanElement | null;
+    const messageForm = document.getElementById(
+      "message-form"
+    ) as HTMLFormElement | null;
+    const loginRequired = document.getElementById(
+      "login-required"
+    ) as HTMLElement | null;
+    const loginRedirectButton = document.getElementById(
+      "login-redirect"
+    ) as HTMLButtonElement | null;
+    const backHomeButton = document.getElementById(
+      "back-home"
+    ) as HTMLButtonElement | null;
+    const messageTextarea = document.getElementById(
+      "message"
+    ) as HTMLTextAreaElement | null;
+    const charCount = document.getElementById(
+      "char-count"
+    ) as HTMLSpanElement | null;
 
     if (isLoggedIn) {
       // Usuario logueado: mostrar formulario
       messageForm?.classList.remove("hidden");
       loginRequired?.classList.add("hidden");
-      
+
       // Prellenar el nombre si está disponible
       const user = getUser();
-      const fullNameInput = document.getElementById("fullname") as HTMLInputElement | null;
+      const fullNameInput = document.getElementById(
+        "fullname"
+      ) as HTMLInputElement | null;
       if (user && fullNameInput) {
         fullNameInput.value = user.user_metadata?.full_name || user.email || "";
       }
@@ -150,10 +170,14 @@ import Button from "@/components/Button.astro";
     if (loginRedirectButton) {
       loginRedirectButton.addEventListener("click", () => {
         // Buscar el modal del header y abrirlo
-        const modalOverlay = document.getElementById("modal-overlay") as HTMLDialogElement | null;
+        const modalOverlay = document.getElementById(
+          "modal-overlay"
+        ) as HTMLDialogElement | null;
         if (modalOverlay) {
           // Asegurar que esté en el tab de signin
-          const signinTab = document.getElementById("signin-tab") as HTMLButtonElement | null;
+          const signinTab = document.getElementById(
+            "signin-tab"
+          ) as HTMLButtonElement | null;
           if (signinTab) {
             signinTab.click();
           }
@@ -178,7 +202,7 @@ import Button from "@/components/Button.astro";
       messageTextarea.addEventListener("input", () => {
         const currentLength = messageTextarea.value.length;
         charCount.textContent = `${currentLength}/300`;
-        
+
         // Cambiar color si se acerca al límite
         if (currentLength > 250) {
           charCount.classList.add("text-yellow-400");
@@ -222,8 +246,10 @@ import Button from "@/components/Button.astro";
   // Reinicializar si el usuario cambia (por ejemplo, si inicia sesión en otra pestaña)
   window.addEventListener("focus", () => {
     const currentState = validateUserSession();
-    const formVisible = !document.getElementById("message-form")?.classList.contains("hidden");
-    
+    const formVisible = !document
+      .getElementById("message-form")
+      ?.classList.contains("hidden");
+
     // Si el estado de login cambió, reinicializar
     if (currentState !== formVisible) {
       initializePage();
