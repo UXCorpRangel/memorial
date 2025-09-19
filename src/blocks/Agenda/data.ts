@@ -2,7 +2,8 @@ import type { Speaker } from "./types";
 
 export const speakers: Speaker[] = [
   {
-    name: "Afor",
+    name: "Afor & Manzdev",
+    session: "Anécdotas y chismes de programación",
     socialMedia: [
       {
         label: "twitch",
@@ -40,10 +41,48 @@ export const speakers: Speaker[] = [
         icon: "linkedin",
       },
     ],
+    extraSocialMedia: [
+      {
+        label: "twitch",
+        link: "https://www.twitch.tv/manzdev",
+        icon: "twitch",
+      },
+      {
+        label: "github",
+        link: "https://github.com/manzdev",
+        icon: "github",
+      },
+      {
+        label: "web",
+        link: "https://manz.dev/",
+        icon: "globe",
+      },
+      {
+        label: "discord",
+        link: "https://discord.gg/w2ddYsQj",
+        icon: "discord",
+      },
+      {
+        label: "youtube",
+        link: "https://www.youtube.com/@manzdev",
+        icon: "youtube",
+      },
+      {
+        label: "twitter",
+        link: "https://x.com/Manz",
+        icon: "twitter",
+      },
+      {
+        label: "linkedin",
+        link: "https://www.linkedin.com/in/joseromanhdez/",
+        icon: "linkedin",
+      },
+    ],
     time: "14:30",
   },
   {
     name: "Charly automatiza",
+    session: "Cómo testear (y más) con MCP al mando",
     socialMedia: [
       {
         label: "twitch",
@@ -85,6 +124,7 @@ export const speakers: Speaker[] = [
   },
   {
     name: "UI Maria Bastidas",
+    session: "Claves para destacar en entrevistas de UX/UI",
     socialMedia: [
       {
         label: "web",
@@ -111,6 +151,7 @@ export const speakers: Speaker[] = [
   },
   {
     name: "Carli",
+    session: "Filosofando sobre inteligencia artificial",
     socialMedia: [
       {
         label: "github",
@@ -142,6 +183,7 @@ export const speakers: Speaker[] = [
   },
   {
     name: "GentlemanProgramming",
+    session: "Sin filtro: tus preguntas en directo",
     socialMedia: [
       {
         label: "twitch",
@@ -183,6 +225,7 @@ export const speakers: Speaker[] = [
   },
   {
     name: "Serudda",
+    session: "Respondiendo sin filtro en directo",
     socialMedia: [
       {
         label: "twitch",
@@ -219,6 +262,7 @@ export const speakers: Speaker[] = [
   },
   {
     name: "Hazel",
+    session: "Kiu: Transformando el aprendizaje de AWS",
     socialMedia: [
       {
         label: "github",
@@ -245,6 +289,7 @@ export const speakers: Speaker[] = [
   },
   {
     name: "Malba",
+    session: "N8N: Automatiza tus workflows x10",
     socialMedia: [
       {
         label: "github",

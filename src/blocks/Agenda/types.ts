@@ -1,6 +1,8 @@
 export interface Speaker {
   name: string;
+  session: string;
   socialMedia: SocialMediaIcon[];
+  extraSocialMedia?: SocialMediaIcon[];
   time: string;
 }
 

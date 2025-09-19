@@ -1,14 +1,11 @@
 ---
 import { Icon } from "astro-icon/components";
 
-interface Props {
-  href: string;
-  label: string;
-  className: string;
+interface Props extends astroHTML.JSX.AnchorHTMLAttributes {
   icon: string;
 }
 
-const { href, label, className, icon } = Astro.props;
+const { icon } = Astro.props;
 ---
 
-<a href={href} aria-label={label} class={className}><Icon name={icon} /></a>
+<a {...Astro.props}><Icon name={icon} /></a>

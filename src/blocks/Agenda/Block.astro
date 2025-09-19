@@ -84,8 +84,8 @@ function convertChileTimeToWorldTimes(chileTimeString: string) {
     Agenda
   </h1>
   <div class="justify-self-center">
-    <p class="text-white text-center max-sm:mb-12 mb-8">
-      Quienes nos van a apoyarnos en esta causa ❤️
+    <p class="text-white text-center max-sm:mb-12 mb-8 lg:text-lg">
+      Quiénes nos van a apoyar en esta causa ❤️
     </p>
     <div class="flex gap-6 sm:gap-10 flex-col sm:flex-row w-full items-center">
       <Button variant="primary"> Donar al Paypal </Button>
@@ -104,15 +104,30 @@ function convertChileTimeToWorldTimes(chileTimeString: string) {
         class="speaker grid grid-cols-[1fr,auto,1fr] gap-x-10 items-start text-white"
         data-active="true"
       >
-        <div class="w-full max-sm:order-2 col-1 sm:text-right truncate">
-          <h2 class="text-[40px] md:text-4xl truncate">{speaker.name}</h2>
+        <div class="max-sm:order-2 col-1 sm:text-right">
+          <h2 class="text-2xl lg:text-4xl line-clamp-1 ml-auto">
+            {speaker.name}
+          </h2>
+          <p class="text-lg sm:text-[32px] text-neutral-400 mt-2">
+            {speaker.session}
+          </p>
           <div class="flex sm:justify-end flex-wrap mt-4 gap-y-4 mb-8">
             {speaker.socialMedia.map((platform) => (
               <LinkIcon
                 href={platform.link}
                 icon={platform.icon}
-                label={platform.label}
-                className="text-white px-2 flex [&_svg]:size-6"
+                title={platform.label}
+                class="text-white px-2 flex [&_svg]:size-6"
+              />
+            ))}
+          </div>
+          <div class="flex sm:justify-end flex-wrap mt-4 gap-y-4 mb-8">
+            {speaker.extraSocialMedia?.map((platform) => (
+              <LinkIcon
+                href={platform.link}
+                icon={platform.icon}
+                title={platform.label}
+                class="text-white px-2 flex [&_svg]:size-6"
               />
             ))}
           </div>
@@ -123,7 +138,7 @@ function convertChileTimeToWorldTimes(chileTimeString: string) {
           data-visible="false"
         />
 
-        <div class="text-[28px] sm:text-[32px] max-sm:order-3 max-sm:col-start-2 text-left flex flex-wrap gap-3 items-start">
+        <div class="text-lg sm:text-[32px] max-sm:order-3 max-sm:col-start-2 text-left flex flex-wrap gap-3 items-start">
           {convertChileTimeToWorldTimes(speaker.time).map(({ time, flag }) => (
             <div class="flex items-start gap-2">
               <span class="font-noto_color_emoji mr-2">{flag}</span>
