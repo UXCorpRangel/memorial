@@ -1,13 +1,13 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro"
-import Button from "@/components/Button.astro"
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
 ---
 
 <BaseLayout title="Página no encontrada">
   <section class="min-h-screen flex items-center justify-center text-center">
     <div class="space-y-8 max-w-3xl flex flex-col items-center">
       <h1
-        class="text-4xl sm:text-5xl lg:text-6xl font-bold bg-clip-text text-transparent animate-neon"
+        class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white bg-clip-text text-transparent animate-neon"
       >
         404
       </h1>
@@ -17,13 +17,20 @@ import Button from "@/components/Button.astro"
         Página no encontrada
       </h2>
       <p class="text-2xl text-white">
-        La página que buscas no existe pero de igual manera puedes
-        apoyarnos con una donación desde aquí.
+        La página que buscas no existe pero de igual manera puedes apoyarnos con
+        una donación desde aquí.
       </p>
       <div>
-        <Button variant="primary"> Donar a Paypal </Button>
-        <Button variant="secondary"> Volver al inicio</Button>
+        <Button variant="primary" disabled> Donar a Paypal </Button>
+        <Button id="back-to-home" variant="secondary"> Volver al inicio</Button>
       </div>
     </div>
   </section>
 </BaseLayout>
+
+<script>
+  const backToHomeButton = document.getElementById("back-to-home");
+  backToHomeButton?.addEventListener("click", () => {
+    window.location.href = "/";
+  });
+</script>

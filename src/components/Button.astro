@@ -3,33 +3,48 @@ interface Props extends astroHTML.JSX.ButtonHTMLAttributes {
   variant?: "primary" | "secondary" | "twitch";
   size?: "small" | "medium" | "large";
 }
-const { variant, size = "large", ...rest } = Astro.props;
+const {
+  variant,
+  size = "large",
+  class: className,
+  disabled,
+  ...rest
+} = Astro.props;
 ---
 
 <button
   {...rest}
+  disabled={disabled}
   class:list={[
+    className,
     "relative items-center w-fit font-semibold text-white hover:outline outline-offset-0 hover:outline-offset-4 transition-all duration-100 before:absolute before:inset-0 before:rounded-[inherit] before:bg-[linear-gradient(45deg,transparent_25%,theme(colors.white/.5)_50%,transparent_75%,transparent_100%)] before:bg-[length:250%_250%,100%_100%] before:bg-[position:200%_0,0_0] before:bg-no-repeat before:[transition:background-position_0s_ease] hover:before:bg-[position:-100%_0,0_0] hover:before:duration-[1000ms]",
     {
       "bg-[linear-gradient(90deg,#F3384A_0%,#972123_100%)] hover:bg-[linear-gradient(90deg,#972123_0%,#F3384A_100%)] outline-primary":
-        variant === "primary",
+        variant === "primary" && !disabled,
       "bg-transparent border border-white hover:underline outline-white":
-        variant === "secondary",
+        variant === "secondary" && !disabled,
       "bg-indigo-500 border border-white hover:underline outline-white":
-        variant === "twitch",
+        variant === "twitch" && !disabled,
+      "bg-gray-600 border border-gray-500 cursor-not-allowed": disabled,
       "text-sm lg:text-base px-2 py-1 lg:px-6 lg:py-3": size === "small",
       "text-base lg:text-lg px-6 py-3 lg:px-8 lg:py-4": size === "medium",
       "text-lg lg:text-xl px-8 py-4 lg:px-10 lg:py-5": size === "large",
     },
-    rest.class,
   ]}
 >
   {
-    variant === "primary" && (
-      <div class="absolute -inset-2 rounded bg-gradient-to-r from-[#F3384A] to-[#F3384A] opacity-25 blur" />
+    variant === "primary" && !disabled && (
+      <div class="absolute -inset-2 rounded bg-gradient-to-r from-[#F3384A] to-[#F3384A] opacity-25" />
     )
   }
-  <div class="relative flex gap-2">
+  {
+    disabled && (
+      <div class="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full transform rotate-12 animate-pulse pointer-events-none z-10">
+        No disponible
+      </div>
+    )
+  }
+  <div class={`relative flex gap-2 ${disabled ? "blur-sm" : ""}`}>
     <slot />
   </div>
 </button>
