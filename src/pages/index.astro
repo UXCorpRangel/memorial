@@ -5,7 +5,7 @@ import { getResolvedSections } from "@blocks/registry.js";
 const sections = getResolvedSections();
 ---
 
-<BaseLayout title="Memorial Landing">
+<BaseLayout>
   <main>
     {sections.map(({ Component, props }) => <Component {...props} />)}
   </main>

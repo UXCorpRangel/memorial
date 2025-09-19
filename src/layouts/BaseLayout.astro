@@ -6,8 +6,8 @@ export interface Props {
 }
 import "../styles/global.css";
 const {
-  title = "Memorial Landing",
-  description = "Una landing page memorial",
+  title = "En memoria de Jaime Gutiérrez (Tyto)",
+  description = "Un espacio creado con amor para recordar a nuestro querido amigo Tyto, en apoyo a su familia, compartir recuerdos y mantener vivo su legado en la comunidad",
   lang = "es",
 } = Astro.props;
 ---
@@ -20,6 +20,23 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <title>{title}</title>
+
+    <!-- Facebook Meta Tags -->
+    <meta property="og:url" content="https://tytomemorial.com">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="En memoria de Jaime Gutiérrez (Tyto)">
+    <meta property="og:description" content="Un espacio creado con amor para recordar a nuestro querido amigo Tyto, en apoyo a su familia, compartir recuerdos y mantener vivo su legado en la comunidad">
+    <meta property="og:image" content="/memorial-open-graph.png">
+
+    <!-- Twitter Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta property="twitter:domain" content="tytomemorial.com">
+    <meta property="twitter:url" content="https://tytomemorial.com">
+    <meta name="twitter:title" content="En memoria de Jaime Gutiérrez (Tyto)">
+    <meta name="twitter:description" content="Un espacio creado con amor para recordar a nuestro querido amigo Tyto, en apoyo a su familia, compartir recuerdos y mantener vivo su legado en la comunidad">
+    <meta name="twitter:image" content="/memorial-open-graph.png">
+
+<!-- Meta Tags Generated via https://www.opengraph.xyz -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
