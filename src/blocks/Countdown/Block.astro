@@ -50,9 +50,27 @@ import { countdownData } from "./data.js";
       <p id="next_hour" class="text-white"></p>
     </div>
   </div>
-  <Button id="button_hero_agenda_countdown" variant="secondary">
-    Ver agenda</Button
-  >
+  <div class="flex flex-col lg:flex-row gap-4">
+    <Button id="button_hero_agenda_countdown" variant="secondary">
+      Ver agenda</Button
+    >
+    <Button id="button_hero_twitch_countdown" variant="twitch" style="display: none;"
+      ><svg
+        fill="#ffffff"
+        width="24"
+        height="24"
+        viewBox="0 0 32 32"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+        data-astro-cid-kijex5pd=""
+      >
+        <path
+          d="M26.711 14.929l-4.284 4.284h-4.285l-3.749 3.749v-3.749h-4.82v-16.067h17.138zM8.502 1.004l-5.356 5.356v19.279h6.427v5.356l5.356-5.356h4.284l9.641-9.64v-14.996zM21.356 6.895h2.142v6.427h-2.142zM15.464 6.895h2.143v6.427h-2.144z"
+          data-astro-cid-kijex5pd=""></path>
+      </svg>
+      Ver transmisión</Button
+    >
+  </div>
 </section>
 
 <script>
@@ -67,6 +85,7 @@ import { countdownData } from "./data.js";
     seconds: document.getElementById("countdown_seg"),
     nextDate: document.getElementById("next_date"),
     nextHour: document.getElementById("next_hour"),
+    twitchButton: document.getElementById("button_hero_twitch_countdown"),
   };
 
   function formatNumber(n: number) {
@@ -103,6 +122,12 @@ import { countdownData } from "./data.js";
       elements.hours.textContent = "00";
       elements.minutes.textContent = "00";
       elements.seconds.textContent = "00";
+      
+      // Mostrar el botón de Twitch cuando el contador llegue a cero
+      if (elements.twitchButton) {
+        elements.twitchButton.style.display = "block";
+      }
+      
       clearInterval(intervalId);
       return;
     }
