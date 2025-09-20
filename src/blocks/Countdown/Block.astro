@@ -54,7 +54,10 @@ import { countdownData } from "./data.js";
     <Button id="button_hero_agenda_countdown" variant="secondary">
       Ver agenda</Button
     >
-    <Button id="button_hero_twitch_countdown" variant="twitch" style="display: none;"
+    <Button
+      id="button_hero_twitch_countdown"
+      variant="twitch"
+      style="display: none;"
       ><svg
         fill="#ffffff"
         width="24"
@@ -122,12 +125,12 @@ import { countdownData } from "./data.js";
       elements.hours.textContent = "00";
       elements.minutes.textContent = "00";
       elements.seconds.textContent = "00";
-      
+
       // Mostrar el botón de Twitch cuando el contador llegue a cero
       if (elements.twitchButton) {
         elements.twitchButton.style.display = "block";
       }
-      
+
       clearInterval(intervalId);
       return;
     }
@@ -157,5 +160,12 @@ import { countdownData } from "./data.js";
   );
   button_countdown_agenda?.addEventListener?.("click", () => {
     window.location.href = "/agenda";
+  });
+
+  const button_countdown_twitch = document.querySelector(
+    "#button_hero_twitch_countdown"
+  );
+  button_countdown_twitch?.addEventListener?.("click", () => {
+    window.location.href = "https://www.twitch.tv/uxanarangel";
   });
 </script>
