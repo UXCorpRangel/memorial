@@ -52,8 +52,12 @@ const loopItems = [...items, ...items];
 
   const messagesContainer = document.querySelector("#messages-container");
 
-  if (messages && messages.length > 0) {
-    messages.forEach((m: Message) => {
+  const orderedMessages = messages?.sort((a, b) => {
+    return new Date(b.created_at).getTime() - new Date(a.created_at).getTime();
+  });
+
+  if (orderedMessages && orderedMessages.length > 0) {
+    orderedMessages.forEach((m: Message) => {
       const article = document.createElement("article");
       article.innerHTML = `
        <article
