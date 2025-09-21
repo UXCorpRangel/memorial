@@ -5,7 +5,7 @@ import { countdownData } from "./data.js";
 
 <section class="flex flex-col items-center justify-center gap-6 py-12 lg:py-48">
   <img src="tyto_and_sandy.png" alt="tyto_and_sandy" class="w-auto h-[180px]" />
-  <div class="flex flex-row flex-wrap gap-4 justify-center items-center">
+  <!-- <div class="flex flex-row flex-wrap gap-4 justify-center items-center">
     {
       [
         { slug: "days", label: "Dias" },
@@ -26,9 +26,9 @@ import { countdownData } from "./data.js";
         );
       })
     }
-  </div>
+  </div> -->
   <p
-    class="text-[20px] md:text-[26px] lg:text-[32px] text-white font-bold text-center"
+    class="text-[20px] md:text-[26px] lg:text-[32px] text-white font-bold text-center max-w-3xl"
   >
     {countdownData.title}
   </p>
@@ -37,7 +37,7 @@ import { countdownData } from "./data.js";
   >
     {countdownData.description}
   </p>
-  <div class="flex items-center gap-6 flex-wrap flex-col lg:flex-row">
+  <!--  <div class="flex items-center gap-6 flex-wrap flex-col lg:flex-row">
     <p class="text-white font-[400]">Próximo</p>
     <div
       class="py-1 px-4 border-[0.81px] border-[#383848] bg-[radial-gradient(circle_at_10%_25%,rgba(67,39,51,0.5)_0%,rgba(34,32,46,0.5)_100%)] flex items-center justify-center"
@@ -49,7 +49,14 @@ import { countdownData } from "./data.js";
     >
       <p id="next_hour" class="text-white"></p>
     </div>
-  </div>
+  </div> -->
+  <iframe
+    src="https://player.twitch.tv/?video=2571350233&parent=tytomemorial.com"
+    frameborder="0"
+    allowfullscreen="true"
+    scrolling="no"
+    height="720"
+    width="1280"></iframe>
   <div class="flex flex-col lg:flex-row gap-4">
     <Button id="button_hero_agenda_countdown" variant="secondary">
       Ver agenda</Button
