@@ -50,13 +50,16 @@ import { countdownData } from "./data.js";
       <p id="next_hour" class="text-white"></p>
     </div>
   </div> -->
-  <iframe
-    src="https://player.twitch.tv/?video=2571350233&parent=tytomemorial.com"
-    frameborder="0"
-    allowfullscreen="true"
-    scrolling="no"
-    height="720"
-    width="1280"></iframe>
+  <div class="w-full max-w-6xl mx-auto">
+    <div class="relative w-full" style="aspect-ratio: 16 / 9;">
+      <iframe
+        src="https://player.twitch.tv/?video=2571350233&parent=tytomemorial.com"
+        frameborder="0"
+        allowfullscreen="true"
+        scrolling="no"
+        class="absolute top-0 left-0 w-full h-full"></iframe>
+    </div>
+  </div>
   <div class="flex flex-col lg:flex-row gap-4">
     <Button id="button_hero_agenda_countdown" variant="secondary">
       Ver agenda</Button
